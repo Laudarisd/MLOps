@@ -76,7 +76,7 @@ This document outlines the workflows for running AI model inference in parallel 
 
 ### Pipeline for Linux Remote Server:
 
-```mermaid
+```text
 graph TD
     A[User Interaction (Cropping Images)] --> B[Image Saved to Linux Remote Server]
     B --> C[FastAPI Endpoint (Trigger Data Receive)]
@@ -96,7 +96,7 @@ graph TD
 
 
 
-```mermaid
+```text
 graph TD
     A[User Interaction (Cropping Images)] --> B[Image Saved to Cloud Storage]
     B --> C[Cloud Function (Trigger Data Receive)]
