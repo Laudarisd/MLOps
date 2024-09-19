@@ -17,6 +17,7 @@ In this repository, we will cover various aspects of MLOps, including best pract
 ## Contents
 1. [Introduction](#introduction)
 2. [Process and TOOLs for MLOps](#Process-and-TOOLs-for-MLOps)
+3. [MLOps Architecture](#MLOps-Architecture)
 
 
 
@@ -143,13 +144,15 @@ The components of MLOps can be visualize and described as follows:
 #########################################################################################
 
 ## MLOps Architecture
-In the following part we will focus on main components of MLOps architecture. The main components of MLOps architecture are as follows:
+In the following section we will focus on main components of MLOps architecture. The main components of MLOps architecture are as follows:
 
 1. **Data Management**: This component is responsible for managing the data used in the machine learning pipeline. It includes data collection, storage, and preprocessing.[click here](./data_management/README.md)
+2. **Model Development**: This component is responsible for developing machine learning models. It includes data preparation, feature engineering, model training, and model validation.[click here](./model_development/README.md)
+
 
 <div align="center">
-  <img src="./img/1.webp" alt="Sample Image" width="500">
-  <p><em>MLOps architecture.</em></p>
+  <img src="./img/7.png" alt="Sample Image" width="500">
+  <p><em>MLOps Architectures.</em></p>
 </div>
 
 [Reference](https://www.igmguru.com/blog/machine-learning-operations-mlops-overview-definition-and-architecture)
