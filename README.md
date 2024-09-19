@@ -59,12 +59,12 @@ The components of MLOps can be visualize and described as follows:
 
 ## Process and TOOLs for MLOps
 
-
+```table
 🚀 **MLOps Workflow** 🚀
 
     ⬇️                               ⬇️                              ⬇️
 +---------------+        +-------------------+        +-----------------------+
-|   Programming |  ----> |  Model Development|  ----> | Model Training &       |
+|  Programming |  ----> |  Model Development|  ----> | Model Training &       |
 | (Python, ML   |        |                   |        |  Validation            |
 | Libraries)    |        |                   |        |                       |
 +---------------+        +-------------------+        +-----------------------+
@@ -82,7 +82,7 @@ The components of MLOps can be visualize and described as follows:
 | Version Control  |  --->|  Orchestration    |  ----> | Scaling & Management  |
 |    (Git)         |     |  (Kubernetes)     |        |  (Kubeflow, Seldon)   |
 +------------------+     +-------------------+        +-----------------------+
-
+```
 
 
 
