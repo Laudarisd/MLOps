@@ -93,3 +93,9 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 
 
 **Receive data in client side**
+
+
+
+refrence for img;
+
+https://superwise.ai/blog/kserve-vs-seldon-core/

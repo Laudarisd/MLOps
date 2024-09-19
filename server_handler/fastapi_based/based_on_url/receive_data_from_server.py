@@ -7,7 +7,7 @@ from logging.handlers import RotatingFileHandler
 
 # Constants
 BASE_SAVE_DIRECTORY = "./received_inference_results"
-SERVER_URL = "http://your ip:8000"  # Replace with your server's URL
+SERVER_URL = "http://your ip:8000"  # Replace with your server's URL and port
 
 # Set up logging
 log_file = "client_receiver.log"
