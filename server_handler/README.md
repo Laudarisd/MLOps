@@ -8,6 +8,9 @@
 
 
 
+
+
+
 **Server Handler - get request from client and send response to client**
 
 
@@ -106,3 +109,5 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 
 
 
+References:
+- https://medium.com/israeli-tech-radar/machine-learning-model-serving-overview-c01a6aa3e823

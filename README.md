@@ -5,8 +5,23 @@
 2. [Requirements](#requirements)
 3. [Skills to be a Full MLops Engineer](#skills-to-be-a-full-mlops-engineer)
 
+
+![Sample Image](./figure/1.webp)
+[refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
+
+
+
 ## Introduction
 As machine learning and AI become more common in software, we need to create good practices and tools to help test, deploy, manage, and monitor these models in real-life situations. This is where MLOps comes in, helping to prevent pproblems in machine elarning applications.
+
+
+
+
+Hidden Technical Debt in Machine Learning Systems
+
+
+![Sample Image](./figure/6.png)
+[reference](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
 
 
 According to SIG MLOps(Special Interest Group for Machine Learning Operations), the best MLOps setup is one where machine learning models are handled just like any other software in a CI/CD(continous Integration/Continous Development) system. THese models are deployed alongside the services that use them, as part of a smooth release process. By following these practices, we aim to speed up the use of AI in software and deliver smarter software faster. Below, we explain key ideas in MLOps, such as step-by-step development, automation, continous development, version control, testing, reproducibility, and monitoring. 
