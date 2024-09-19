@@ -1,4 +1,7 @@
-# README
+# MLops Engineer
+MLOps, short for Machine Learning Operations, is a key aspect of Machine Learning engineering that focuses on efficiently deploying machine learning models into production and ensuring their ongoing maintenance and monitoring. It is a collaborative effort that typically involves data scientists, DevOps engineers, and IT professionals working together.
+
+In this repository, we will cover various aspects of MLOps, including best practices, tools, and techniques for deploying, monitoring, and managing machine learning models in production. We will explore topics from backeend development to front-end development, and from data management to model training and validation. Moreover, we will also explore continuous integration and continuous deployment (CI/CD), model versioning, containerization, orchestration, and monitoring.
 
 ## Contents
 1. [Introduction](#introduction)
@@ -89,3 +92,8 @@ By developing these skills and fulfilling the software and hardware requirements
 
 Feel free to explore the repository and make use of the resources provided to enhance your MLops skills.
 
+
+
+
+References:
+- https://medium.com/israeli-tech-radar/machine-learning-model-serving-overview-c01a6aa3e823

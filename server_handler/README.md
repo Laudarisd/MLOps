@@ -1,8 +1,7 @@
 # Handling Server
 
 
-![Sample Image](./img/1.webp)
-[refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
+
 
 
 
