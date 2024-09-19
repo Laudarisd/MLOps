@@ -62,89 +62,63 @@ The components of MLOps can be visualize and described as follows:
 ```table
 🚀 **MLOps Workflow** 🚀
 
-    ⬇️                               ⬇️                              ⬇️
+        ⬇️                        ⬇️                             ⬇️
 +---------------+        +-------------------+        +-----------------------+
-| _Programming_ |  ----> |  Model Development|  ----> |    Model Training &   |
-| (Python, ML   |        |                   |        |    Validation         |
-| Libraries)    |        |                   |        |                       |
+|  Programming  |  ----> | Model Development |  ----> |    Model Training &   |
+| (Python, ML   |        |  - Fasetapi       |        |    Validation         |
+| Libraries)    |        |  - Sheldon Core   |        |                       |
 +---------------+        +-------------------+        +-----------------------+
-
-        ⬇️                               ⬇️                              ⬇️
-
+         ⬇️                       ⬇️                             ⬇️
 +------------------+     +-------------------+        +-----------------------+
 | Containerization | --->| Deployment (CI/CD)|  ----> |  Monitoring & Logging |
 |   (Docker)       |     |  (Jenkins, etc.)  |        |  (Prometheus, Grafana)|
 +------------------+     +-------------------+        +-----------------------+
-
-        ⬇️                               ⬇️                              ⬇️
-
+        ⬇️                        ⬇️                             ⬇️
 +------------------+     +-------------------+        +-----------------------+
 | Version Control  | --->|  Orchestration    |  ----> | Scaling & Management  |
 |    (Git)         |     |  (Kubernetes)     |        |  (Kubeflow, Seldon)   |
 +------------------+     +-------------------+        +-----------------------+
 ```
 
+***Programming Languagse***:
+- **Python**
 
-
-### Software
-- **Python 3.8+**
-- **Docker**
-- **Kubernetes**
-- **Git**
-
-### Libraries and Tools
+***ML Libraries***:
 - **Scikit-learn**
 - **TensorFlow or PyTorch**
-- **MLflow**
-- **Kubeflow**
+
+***ML Model Deployment***:
+- **FastAPI
+- **Seldon Core**
+
+***Cloud Platforms & Deployment***
+- **AWS**
+- **Azure**
+- **Google Cloud Platform**
+
+***Deployment(CI/CD)***:
 - **Jenkins**
+
+***Container & Orchestration***:
+- **Docker**
+- **Kubernetes**
+
+***Monitoring & Logging***:
 - **Prometheus**
 - **Grafana**
 
-### Hardware
-- A machine with at least 8GB of RAM
-- A stable internet connection
+***Version Control***:
+- **Git**
 
-## Skills to be a Full MLops Engineer
+***Scaling & Management***:
+- **Kubeflow**
+- **Seldon**
 
-### Technical Skills
-1. **Programming**: 
-   - Proficiency in Python.
-   - Familiarity with ML libraries like TensorFlow, PyTorch, and Scikit-learn.
-2. **Data Management**: 
-   - Understanding data processing, transformation, and management tools.
-3. **Model Training and Validation**: 
-   - Experience with model training, hyperparameter tuning, and validation techniques.
-4. **Version Control**: 
-   - Knowledge of version control systems like Git.
-5. **Continuous Integration/Continuous Deployment (CI/CD)**: 
-   - Experience with CI/CD tools like Jenkins, GitLab CI, or GitHub Actions.
-6. **Containerization**: 
-   - Familiarity with Docker for containerization.
-7. **Orchestration**: 
-   - Experience with Kubernetes for orchestration.
-8. **Cloud Services**: 
-   - Experience with cloud platforms like AWS, Google Cloud Platform (GCP), or Microsoft Azure.
-9. **Monitoring and Logging**: 
-   - Skills in setting up and managing monitoring and logging tools like Prometheus, Grafana, and ELK stack.
+***Data Management***:
+- **Databricks**
+- **Snowflake**
 
-### Soft Skills
-1. **Problem-Solving**: 
-   - Ability to identify, analyze, and solve problems efficiently.
-2. **Collaboration**: 
-   - Strong collaboration skills to work with cross-functional teams.
-3. **Communication**: 
-   - Excellent communication skills to explain technical concepts to non-technical stakeholders.
-4. **Adaptability**: 
-   - Ability to adapt to new tools, technologies, and methodologies quickly.
-5. **Attention to Detail**: 
-   - Keen attention to detail to ensure models are deployed and monitored correctly.
 
-By developing these skills and fulfilling the software and hardware requirements, you will be well-equipped to pursue a career as a full MLops Engineer.
-
----
-
-Feel free to explore the repository and make use of the resources provided to enhance your MLops skills.
 
 
 
