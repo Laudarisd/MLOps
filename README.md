@@ -80,14 +80,14 @@ The components of MLOps can be visualize and described as follows:
 +------------------+     +-------------------+        +-----------------------+
 ```
 
-***Programming Languagse***:
+*Programming Languagse*:
 - **Python**
 
-***ML Libraries***:
+*ML Libraries*:
 - **Scikit-learn**
 - **TensorFlow or PyTorch**
 
-**ML Model Deployment**
+*ML Model Deployment*
 - **REST API Frameworks**: 
   - **FastAPI**, **Flask**, **Django**
 - **Advanced Platforms**: 
@@ -96,30 +96,30 @@ The components of MLOps can be visualize and described as follows:
   - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
   - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
 
-***Cloud Platforms & Deployment***
+*Cloud Platforms & Deployment**
 - **AWS**
 - **Azure**
 - **Google Cloud Platform**
 
-***Deployment(CI/CD)***:
+*Deployment(CI/CD)*:
 - **Jenkins**
 
-***Container & Orchestration***:
+*Container & Orchestration*:
 - **Docker**
 - **Kubernetes**
 
-***Monitoring & Logging***:
+*Monitoring & Logging*:
 - **Prometheus**
 - **Grafana**
 
-***Version Control***:
+*Version Control*:
 - **Git**
 
-***Scaling & Management***:
+*Scaling & Management*:
 - **Kubeflow**
 - **Seldon**
 
-***Data Management***:
+*Data Management*:
 - **Databricks**
 - **Snowflake**
 
