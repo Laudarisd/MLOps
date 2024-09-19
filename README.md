@@ -58,28 +58,30 @@ The components of MLOps can be visualize and described as follows:
 ##########################################################################################################################
 
 ## Process and TOOLs for MLOps
-MLOps Workflow:
 
-+------------------+       +------------------------+       +-------------------------+
-|  Programming     | ----> |   Model Development    | ----> |   Model Training and     |
-| (Python, ML libs)|       |                        |       |      Validation          |
-+------------------+       +------------------------+       +-------------------------+
 
-       |                              |                                    |
-       v                              v                                    v
+🚀 **MLOps Workflow** 🚀
 
-+------------------+       +------------------------+       +-------------------------+
-|  Containerization| ----> |   Deployment           | ----> |  Monitoring and Logging  |
-|    (Docker)      |       |    (CI/CD Tools)       |       |  (Prometheus, Grafana)   |
-+------------------+       +------------------------+       +-------------------------+
+    ⬇️                               ⬇️                              ⬇️
++---------------+        +-------------------+        +-----------------------+
+|   Programming |  ----> |  Model Development|  ----> | Model Training &       |
+| (Python, ML   |        |                   |        |  Validation            |
+| Libraries)    |        |                   |        |                       |
++---------------+        +-------------------+        +-----------------------+
 
-       |                              |                                    |
-       v                              v                                    v
+        ⬇️                               ⬇️                              ⬇️
 
-+-------------------+      +------------------------+       +-------------------------+
-|  Version Control  | ----> |   Orchestration        | ----> |  Scaling & Workflow      |
-|      (Git)        |       |     (Kubernetes)       |       |     Management          |
-+-------------------+       +------------------------+       +-------------------------+
++------------------+     +-------------------+        +-----------------------+
+| Containerization |  --->| Deployment (CI/CD)|  ----> |  Monitoring & Logging  |
+|   (Docker)       |     |  (Jenkins, etc.)  |        |  (Prometheus, Grafana) |
++------------------+     +-------------------+        +-----------------------+
+
+        ⬇️                               ⬇️                              ⬇️
+
++------------------+     +-------------------+        +-----------------------+
+| Version Control  |  --->|  Orchestration    |  ----> | Scaling & Management  |
+|    (Git)         |     |  (Kubernetes)     |        |  (Kubeflow, Seldon)   |
++------------------+     +-------------------+        +-----------------------+
 
 
 
