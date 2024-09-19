@@ -26,7 +26,7 @@ These are used for small-scale deployments or when you need a quick way to expos
   - A high-performance, modern web framework for building APIs with Python.
   - **Use Case**: Best for asynchronous model inference, where speed and concurrency matter.
   - **Components**: 
-    - **Uvicorn**: ASGI server powering FastAPI, ensuring fast async API calls.
+    - **Uvicorn**: Asynchronous Server Gateway Interface (ASGI) server powering FastAPI, ensuring fast async API calls.
   - **Pros**: 
     - Automatic generation of OpenAPI and JSON schemas.
     - Asynchronous and high-performance.
@@ -58,8 +58,8 @@ These are used for small-scale deployments or when you need a quick way to expos
 
 #### Supporting Components for REST API Frameworks
 
-- **Uvicorn**: ASGI server used with FastAPI for async API calls.
-- **Gunicorn**: WSGI server for Flask and Django.
+- **Uvicorn**: ASGI(Async Server Gateway Interface) server used with FastAPI for async API calls.
+- **Gunicorn**: WSGI( Web Server Gateway Interface) server for Flask and Django.
 - **Nginx**: A reverse proxy, load balancer, and web server to improve performance and security.
 - **Docker**: Containerizes REST API applications for easy deployment and management.
 
