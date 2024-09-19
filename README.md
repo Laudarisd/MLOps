@@ -55,7 +55,7 @@ The components of MLOps can be visualize and described as follows:
 [reference](https://www.databricks.com/glossary/mlops)
 
 
-##########################################################################################################################
+######################################################################################
 
 ## Process and TOOLs for MLOps
 
@@ -87,9 +87,14 @@ The components of MLOps can be visualize and described as follows:
 - **Scikit-learn**
 - **TensorFlow or PyTorch**
 
-***ML Model Deployment***:
-- **FastAPI
-- **Seldon Core**
+**ML Model Deployment**
+- **REST API Frameworks**: 
+  - **FastAPI**, **Flask**, **Django**
+- **Advanced Platforms**: 
+  - **Seldon Core**: Kubernetes-native platform for deploying, scaling, and managing thousands of models.
+  - **Kubeflow**: End-to-end orchestration for machine learning workflows on Kubernetes.
+  - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
+  - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
 
 ***Cloud Platforms & Deployment***
 - **AWS**
