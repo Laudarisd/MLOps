@@ -6,7 +6,7 @@
 3. [Skills to be a Full MLops Engineer](#skills-to-be-a-full-mlops-engineer)
 
 
-![Sample Image](./figure/1.webp)
+![Sample Image](./figures/1.webp)
 [refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
 
@@ -20,7 +20,7 @@ As machine learning and AI become more common in software, we need to create goo
 Hidden Technical Debt in Machine Learning Systems
 
 
-![Sample Image](./figure/6.png)
+![Sample Image](./figures/6.png)
 [reference](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
 
 
