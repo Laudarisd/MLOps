@@ -24,9 +24,10 @@ In this repository, we will cover various aspects of MLOps, including best pract
 ## Introduction
 As machine learning and AI become more common in software, we need to create good practices and tools to help test, deploy, manage, and monitor these models in real-life situations. This is where MLOps comes in, helping to prevent pproblems in machine elarning applications.
 
-A common life cycle of MLOps engineering is visualize below:
-
-![Sample Image](./img/1.png)
+<div align="center">
+  <img src="./img/1.png" alt="Sample Image" width="500">
+  <p><em>A common life cycle of MLOps engineering.</em></p>
+</div>
 
 [reference](https://www.databricks.com/glossary/mlops)
 
@@ -52,7 +53,11 @@ The components of MLOps can be visualize and described as follows:
 - Model monitoring
 - Automated model retraining
 
-![Sample Image](./img/2.png)
+
+<div align="center">
+  <img src="./img/2.png" alt="Sample Image" width="500">
+  <p><em>Key components of MLOps.</em></p>
+</div>
 
 [reference](https://www.databricks.com/glossary/mlops)
 
