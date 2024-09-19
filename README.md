@@ -9,13 +9,18 @@ In this repository, we will cover various aspects of MLOps, including best pract
 3. [Skills to be a Full MLops Engineer](#skills-to-be-a-full-mlops-engineer)
 
 
-![Sample Image](./figures/1.webp)
-[refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
-
 
 
 ## Introduction
 As machine learning and AI become more common in software, we need to create good practices and tools to help test, deploy, manage, and monitor these models in real-life situations. This is where MLOps comes in, helping to prevent pproblems in machine elarning applications.
+
+A common life cycle of MLOps engineering is visualize below:
+
+![Sample Image](./figures/1.png)
+
+[reference](https://www.databricks.com/glossary/mlops)
+
+
 
 ***What is the purpose of MLOps?***
 MLOps is an effective method for building and improving machine learning and AI solutions. By using MLOps, data scientists and machine learning engineers can work together more efficiently, speeding up the development and deployment of models. It also incorporates continuous integration and deployment (CI/CD) practices, along with proper monitoring, validation, and management of ML models.
@@ -38,13 +43,10 @@ The components of MLOps can be visualize and described as follows:
 
 
 ![Sample Image](./figures/2.png)
+
 [reference](https://www.databricks.com/glossary/mlops)
 
 
-A common life cycle of MLOps engineering is visualize below:
-
-![Sample Image](./figures/1.png)
-[reference](https://www.databricks.com/glossary/mlops)
 
 
 
@@ -123,6 +125,10 @@ Feel free to explore the repository and make use of the resources provided to en
 
 
 
+
+
+![Sample Image](./figures/1.webp)
+[refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
 References:
 
