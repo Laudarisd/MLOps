@@ -148,7 +148,9 @@ In the following section we will focus on main components of MLOps architecture.
 
 1. **Data Management**: This component is responsible for managing the data used in the machine learning pipeline. It includes data collection, storage, and preprocessing.[click here](./data_management/README.md)
 2. **Model Development**: This component is responsible for developing machine learning models. It includes data preparation, feature engineering, model training, and model validation.[click here](./model_development/README.md)
-
+3. **Model Deployment**: This component is responsible for deploying machine learning models into production. It includes model serving, model inference, and model monitoring.[click here](./model_deployement/README.md)
+4. **Monitoring & Logging**: This component is responsible for monitoring and logging machine learning models in production. It includes tracking model performance, detecting model drift, and logging model predictions.[click here](./monitoring_and_logging/README.md)
+5. **Model Governance & Compliance**: This component is responsible for ensuring that machine learning models comply with regulations and best practices. It includes model review, model governance, and model compliance.[click here](./model_governance_and_compliance/README.md)
 
 <div align="center">
   <img src="./img/7.png" alt="Sample Image" width="500">
