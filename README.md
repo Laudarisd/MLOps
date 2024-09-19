@@ -37,7 +37,7 @@ The components of MLOps can be visualize and described as follows:
 - Automated model retraining
 
 
-![Sample Image](./figures/2.jpg)
+![Sample Image](./figures/2.png)
 [reference](https://www.databricks.com/glossary/mlops)
 
 
