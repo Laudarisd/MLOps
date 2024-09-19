@@ -140,6 +140,21 @@ The components of MLOps can be visualize and described as follows:
 [Reference](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
 
+#########################################################################################
+
+## MLOps Architecture
+In the following part we will focus on main components of MLOps architecture. The main components of MLOps architecture are as follows:
+
+1. **Data Management**: This component is responsible for managing the data used in the machine learning pipeline. It includes data collection, storage, and preprocessing.[click here](./data_management/README.md)
+
+<div align="center">
+  <img src="./img/1.webp" alt="Sample Image" width="500">
+  <p><em>MLOps architecture.</em></p>
+</div>
+
+[Reference](https://www.igmguru.com/blog/machine-learning-operations-mlops-overview-definition-and-architecture)
+
+
 
 References:
 
