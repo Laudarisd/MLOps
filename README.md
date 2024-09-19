@@ -6,14 +6,14 @@ MLOps, short for Machine Learning Operations, is a key aspect of Machine Learnin
 [reference](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) - [this paper shows the Hidden Technical Debt in Machine Learning Systems. The paper discusses the challenges of deploying machine learning systems in production and the hidden technical debt that can accumulate over time. MLOps aims to address these challenges by providing best practices and tools for managing machine learning models in production.]
 
 
-According to SIG MLOps(Special Interest Group for Machine Learning Operations), the best MLOps setup is one where machine learning models are handled just like any other software in a CI/CD(continous Integration/Continous Development) system. THese models are deployed alongside the services that use them, as part of a smooth release process. By following these practices, we aim to speed up the use of AI in software and deliver smarter software faster. Below, we explain key ideas in MLOps, such as step-by-step development, automation, continous development, version control, testing, reproducibility, and monitoring. 
+According to SIG MLOps(Special Interest Group for Machine Learning Operations), the best MLOps setup is one where machine learning models are handled just like any other software in a CI/CD(continous Integration/Continous Development) system. These models are deployed alongside the services that use them, as part of a smooth release process. By following these practices, we aim to speed up the use of AI in software and deliver smarter software faster. Below, we explain key ideas in MLOps, such as step-by-step development, automation, continous development, version control, testing, reproducibility, and monitoring. 
 
 
 In this repository, we will cover various aspects of MLOps, including best practices, tools, and techniques for deploying, monitoring, and managing machine learning models in production. We will explore topics from backeend development to front-end development, and from data management to model training and validation. Moreover, we will also explore continuous integration and continuous deployment (CI/CD), model versioning, containerization, orchestration, and monitoring.
 
 ## Contents
 1. [Introduction](#introduction)
-2. [Requirements](#requirements)
+2. [Process and TOOLs for MLOps](#Process-and-TOOLs-for-MLOps)
 3. [Skills to be a Full MLops Engineer](#skills-to-be-a-full-mlops-engineer)
 
 
@@ -55,16 +55,32 @@ The components of MLOps can be visualize and described as follows:
 [reference](https://www.databricks.com/glossary/mlops)
 
 
+##########################################################################################################################
+
+## Process and TOOLs for MLOps
++------------------+       +----------------------+       +-------------------------+
+|    Programming   | ----> |   Model Development  | ----> |   Model Training and     |
+| (Python, ML libs)|       |                      |       |      Validation          |
++------------------+       +----------------------+       +-------------------------+
+
+      |                             |                                    |
+      v                             v                                    v
+
++------------------+       +----------------------+       +-------------------------+
+|  Containerization | ----> |   Deployment         | ----> |   Monitoring and         |
+|   (Docker)        |       |  (CI/CD Tools)       |       |      Logging (Prometheus,|
++------------------+       +----------------------+       |         Grafana)         |
+                                                         +-------------------------+
+                                                             
+      |                             |                                    |
+      v                             v                                    v
+
++------------------+       +----------------------+       +-------------------------+
+|   Version Control| ----> |   Orchestration       | ----> |   Scaling and            |
+|     (Git)        |       |     (Kubernetes)      |       |   Workflow Management    |
++------------------+       +----------------------+       +-------------------------+
 
 
-
-
-
-
-
-
-## Requirements
-To get started with the contents of this repository, you need the following:
 
 ### Software
 - **Python 3.8+**
