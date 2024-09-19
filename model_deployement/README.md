@@ -10,164 +10,156 @@ There are several ways to deploy a model. Some of the popular ways are as follow
     - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
 
 
-# Choice of Framework
+---
 
-### 1. **REST API Frameworks**:
-   - **FastAPI**, **Flask**, **Django**
+# Server Deployment Options for ML Model Deployment
 
-**When to Use**:
-- **Small to Medium Applications**: When deploying a few machine learning models or building a prototype.
-- **Lightweight Applications**: When you need to expose your ML model as an API quickly with minimal infrastructure.
-- **Quick Development**: Ideal when the focus is on developing and testing APIs without needing advanced scalability features.
+This section discusses the various server deployment frameworks and advanced platforms for deploying machine learning models, from simple REST API frameworks to advanced Kubernetes-native solutions.
 
-**Pros**:
-- **Simple Setup**: Easy to develop and deploy small-scale applications.
-- **Flexible**: Can easily integrate with other services (databases, frontends, etc.).
-- **Great for Prototyping**: Quickly deploy models for testing or demonstration.
-- **Community Support**: Popular frameworks with a large ecosystem of libraries and support.
+### 1. **REST API Frameworks**
 
-**Cons**:
-- **Limited Scalability**: Not ideal for large-scale or high-traffic applications.
-- **Manual Scaling**: Requires manual intervention for scaling, orchestration, and monitoring.
-- **Lacks Advanced Features**: No built-in model versioning, A/B testing, or advanced deployment strategies.
+These are used for small-scale deployments or when you need a quick way to expose your machine learning models as APIs.
 
-### 2. **Advanced Platforms**:
-   - **Seldon Core**: Kubernetes-native platform for deploying, scaling, and managing thousands of models.
-   - **Kubeflow**: End-to-end orchestration for machine learning workflows on Kubernetes.
-   - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
-   - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
+#### Common Frameworks
 
-**When to Use**:
-- **Large-Scale Applications**: Ideal when deploying, scaling, and managing many models in production.
-- **Model Lifecycle Management**: When you need features like model versioning, monitoring, and A/B testing.
-- **Kubernetes Environments**: When using Kubernetes for orchestration and require a Kubernetes-native platform for scaling.
-- **CI/CD Pipelines**: When automating the continuous integration and deployment of ML models with multiple pipelines.
+- **FastAPI**: 
+  - A high-performance, modern web framework for building APIs with Python.
+  - **Use Case**: Best for asynchronous model inference, where speed and concurrency matter.
+  - **Components**: 
+    - **Uvicorn**: ASGI server powering FastAPI, ensuring fast async API calls.
+  - **Pros**: 
+    - Automatic generation of OpenAPI and JSON schemas.
+    - Asynchronous and high-performance.
+  - **Cons**: 
+    - Requires external tools (e.g., Nginx) for load balancing in production.
 
-**Pros**:
-- **Scalability**: Can handle thousands of models, ensuring automated scaling, versioning, and management.
-- **Model Management**: Built-in features for model lifecycle management (versioning, rolling updates, A/B testing).
-- **Automation**: Integrates with CI/CD pipelines, automating deployment and monitoring processes.
-- **High Performance**: Optimized for production environments with high availability and low-latency inference.
+- **Flask**: 
+  - A lightweight web framework for quick API setup.
+  - **Use Case**: Suitable for small ML model deployments.
+  - **Components**: 
+    - **Gunicorn**: Commonly used to serve Flask applications in production.
+  - **Pros**: 
+    - Easy to set up and flexible.
+  - **Cons**: 
+    - Not optimized for asynchronous tasks.
+    - Can be slower for larger-scale applications.
 
-**Cons**:
-- **Complex Setup**: Requires significant knowledge of Kubernetes and can be challenging to set up.
-- **Overkill for Small Projects**: These platforms may add unnecessary complexity and overhead for small-scale deployments.
-- **Resource-Intensive**: Requires more infrastructure and resources, especially for larger clusters.
+- **Django**: 
+  - A full-stack web framework with built-in tools for data handling and user authentication.
+  - **Use Case**: Great for building web-based ML applications.
+  - **Components**: 
+    - **Gunicorn**: Standard for serving Django apps.
+    - **Daphne**: For async Django applications.
+  - **Pros**: 
+    - Comes with built-in ORM and admin panel.
+  - **Cons**: 
+    - Heavier than Flask or FastAPI.
+    - Not optimized for microservices architecture.
+
+#### Supporting Components for REST API Frameworks
+
+- **Uvicorn**: ASGI server used with FastAPI for async API calls.
+- **Gunicorn**: WSGI server for Flask and Django.
+- **Nginx**: A reverse proxy, load balancer, and web server to improve performance and security.
+- **Docker**: Containerizes REST API applications for easy deployment and management.
 
 ---
 
-## Summary
+### 2. **Advanced Platforms**
 
-- **Use REST API Frameworks** (FastAPI, Flask, Django):
-   - Ideal for quick deployment of a few models, prototyping, or building small to medium-scale applications.
-   - Best for cases where you don't need to manage hundreds of models or require advanced scalability.
+These are designed for large-scale machine learning model deployments, offering features like auto-scaling, versioning, and orchestration.
 
-- **Use Advanced Platforms** (Seldon Core, Kubeflow, TensorFlow Serving, TorchServe):
-   - Suitable for large-scale applications with multiple models requiring full automation, scaling, and management.
-   - Best when using Kubernetes and need advanced model management features like versioning, A/B testing, and monitoring.
+#### Common Platforms
+
+- **Seldon Core**: 
+  - A Kubernetes-native platform for deploying and managing thousands of machine learning models.
+  - **Use Case**: Ideal for complex, large-scale deployments.
+  - **Components**:
+    - **Kubernetes**: For orchestration.
+    - **Istio**: For service mesh and traffic management.
+    - **Grafana/Prometheus**: For monitoring and alerting.
+  - **Pros**: 
+    - Supports A/B testing, canary deployments, and rolling updates.
+    - Highly scalable.
+  - **Cons**: 
+    - Requires Kubernetes expertise.
+
+- **Kubeflow**: 
+  - A complete end-to-end platform for ML workflows on Kubernetes.
+  - **Use Case**: Ideal for managing the entire ML pipeline, from training to deployment.
+  - **Components**: 
+    - **Kubernetes**: For orchestration.
+    - **KFServing**: For serving models.
+    - **Kubeflow Pipelines**: For managing ML workflows.
+  - **Pros**: 
+    - Full support for ML pipeline automation.
+  - **Cons**: 
+    - Complex to set up.
+
+- **TensorFlow Serving**: 
+  - A high-performance serving system for TensorFlow models.
+  - **Use Case**: Designed for deploying TensorFlow models in production.
+  - **Components**: 
+    - **gRPC/REST**: For model inference.
+  - **Pros**: 
+    - Optimized for TensorFlow models.
+    - Supports model versioning.
+  - **Cons**: 
+    - Primarily supports TensorFlow models.
+
+- **TorchServe**: 
+  - A PyTorch-native serving platform for large-scale model deployment.
+  - **Use Case**: Ideal for deploying PyTorch models.
+  - **Components**: 
+    - **gRPC/REST**: For serving models.
+  - **Pros**: 
+    - Native to PyTorch, making it easy to serve models.
+  - **Cons**: 
+    - Primarily focused on PyTorch models.
+
+---
+
+### **Supporting Components for Advanced Platforms**
+
+- **Kubernetes**: Central to advanced platforms for orchestration, auto-scaling, and rolling updates.
+- **Istio**: Provides security, traffic management, and monitoring in Kubernetes.
+- **Prometheus & Grafana**: For monitoring resource usage, model performance, and alerting.
+- **CI/CD Pipelines (e.g., Jenkins, GitLab CI)**: Automates deployment and scaling in production environments.
+
+---
+
+### **When to Use REST API Frameworks vs. Advanced Platforms**
+
+#### REST API Frameworks
+- **When to use**: 
+  - Small-scale deployments or for exposing a few models.
+  - When you need simplicity and quick setup.
+- **Pros**: 
+  - Easy to use and set up.
+  - Ideal for lightweight applications.
+- **Cons**: 
+  - Limited scalability without additional infrastructure.
+  - Requires manual management of model versioning and scaling.
+
+#### Advanced Platforms
+- **When to use**: 
+  - Large-scale deployments with complex workflows.
+  - When you need features like versioning, A/B testing, and canary releases.
+- **Pros**: 
+  - Supports complex workflows and scaling.
+  - Integrated monitoring and orchestration.
+- **Cons**: 
+  - Requires expertise in Kubernetes and complex infrastructure.
 
 
-
-
-
-
-
-
-
-
-**Server Handler - get request from client and send response to client**
-
-
-
-
-**Server Engine - handle the request and process required tasks in server side**
-
-
-**Server Handler- send response to client server**
-
- In this project we are implementing FASTAPI as server handler and server engine. So there are several methods to handle server post request.
-
- One important point is that FASTAPI direclt doesn't allow us to send multiple response to client. So we have to use some other methods to send multiple response to client such as `Zip and send`, `Streeaming response`, or `multiple file upload endpoint`.
-
-For example:
-
-```pyhton
-from fastapi import FastAPI
-from fastapi.responses import FileResponse
-import zipfile
-import os
-from tempfile import NamedTemporaryFile
-
-app = FastAPI()
-
-@app.get("/download-files")
-async def download_files():
-    # List of files to be zipped and sent
-    files_to_send = ["/path/to/file1.txt", "/path/to/file2.pdf", "/path/to/file3.jpg"]
-    
-    # Create a temporary zip file
-    with NamedTemporaryFile(delete=False) as tmp_zip:
-        with zipfile.ZipFile(tmp_zip, 'w', zipfile.ZIP_DEFLATED) as archive:
-            for file_path in files_to_send:
-                archive.write(file_path, os.path.basename(file_path))
-        
-        # Return the zip file as a response
-        return FileResponse(
-            tmp_zip.name,
-            media_type="application/zip",
-            filename="files.zip"
-        )
-```
-
-
-Another method for streaming response is as follows:
-
-```python
-from fastapi import FastAPI
-from fastapi.responses import StreamingResponse
-import io
-import zipfile
-
-app = FastAPI()
-
-@app.get("/stream-files")
-async def stream_files():
-    files_to_send = ["/path/to/file1.txt", "/path/to/file2.pdf", "/path/to/file3.jpg"]
-    
-    def iter_files():
-        with io.BytesIO() as zip_buffer:
-            with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-                for file_path in files_to_send:
-                    zip_file.write(file_path)
-            yield zip_buffer.getvalue()
-    
-    return StreamingResponse(
-        iter_files(),
-        media_type="application/zip",
-        headers={"Content-Disposition": "attachment; filename=files.zip"}
-    )
-```
-
-And multiple file upload endpoint is as follows:
-
-```python
-
-from fastapi import FastAPI, File, UploadFile
-from typing import List
-
-app = FastAPI()
-
-@app.post("/upload-files/")
-async def create_upload_files(files: List[UploadFile] = File(...)):
-    return {"filenames": [file.filename for file in files]}
-
-```
+---
 
 
 
 
 
-**Receive data in client side**
+
+
 
 
 
