@@ -96,7 +96,7 @@ The components of MLOps can be visualize and described as follows:
   - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
   - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
 
-*Cloud Platforms & Deployment**
+*Cloud Platforms & Deployment*
 - **AWS**
 - **Azure**
 - **Google Cloud Platform**
@@ -129,7 +129,7 @@ The components of MLOps can be visualize and described as follows:
 
 
 
-![Sample Image](./figures/1.webp)
+![Sample Image](./img/1.webp)
 [refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
 References:
