@@ -64,22 +64,22 @@ The components of MLOps can be visualize and described as follows:
 
     ⬇️                               ⬇️                              ⬇️
 +---------------+        +-------------------+        +-----------------------+
-|  Programming |  ----> |  Model Development|  ----> | Model Training &       |
-| (Python, ML   |        |                   |        |  Validation            |
+| _Programming_ |  ----> |  Model Development|  ----> |    Model Training &   |
+| (Python, ML   |        |                   |        |    Validation         |
 | Libraries)    |        |                   |        |                       |
 +---------------+        +-------------------+        +-----------------------+
 
         ⬇️                               ⬇️                              ⬇️
 
 +------------------+     +-------------------+        +-----------------------+
-| Containerization |  --->| Deployment (CI/CD)|  ----> |  Monitoring & Logging  |
-|   (Docker)       |     |  (Jenkins, etc.)  |        |  (Prometheus, Grafana) |
+| Containerization | --->| Deployment (CI/CD)|  ----> |  Monitoring & Logging |
+|   (Docker)       |     |  (Jenkins, etc.)  |        |  (Prometheus, Grafana)|
 +------------------+     +-------------------+        +-----------------------+
 
         ⬇️                               ⬇️                              ⬇️
 
 +------------------+     +-------------------+        +-----------------------+
-| Version Control  |  --->|  Orchestration    |  ----> | Scaling & Management  |
+| Version Control  | --->|  Orchestration    |  ----> | Scaling & Management  |
 |    (Git)         |     |  (Kubernetes)     |        |  (Kubeflow, Seldon)   |
 +------------------+     +-------------------+        +-----------------------+
 ```
