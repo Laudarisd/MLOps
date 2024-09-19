@@ -1,5 +1,13 @@
 # Handling Server
 
+
+![Sample Image](./img/1.webp)
+[refrence](https://superwise.ai/blog/kserve-vs-seldon-core/)
+
+
+
+
+
 **Server Handler - get request from client and send response to client**
 
 
@@ -96,6 +104,5 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 
 
 
-refrence for img;
 
-https://superwise.ai/blog/kserve-vs-seldon-core/
+
