@@ -17,6 +17,35 @@ In this repository, we will cover various aspects of MLOps, including best pract
 ## Introduction
 As machine learning and AI become more common in software, we need to create good practices and tools to help test, deploy, manage, and monitor these models in real-life situations. This is where MLOps comes in, helping to prevent pproblems in machine elarning applications.
 
+***What is the purpose of MLOps?***
+MLOps is an effective method for building and improving machine learning and AI solutions. By using MLOps, data scientists and machine learning engineers can work together more efficiently, speeding up the development and deployment of models. It also incorporates continuous integration and deployment (CI/CD) practices, along with proper monitoring, validation, and management of ML models.
+
+***Why do we need MLOps?***
+Deploying machine learning models is challenging due to the complexity of the machine learning lifecycle, which includes tasks like data collection, preparation, model training, tuning, deployment, and monitoring. It also involves collaboration between teams such as Data Engineering, Data Science, and ML Engineering. MLOps helps streamline these processes, ensuring they work smoothly together through experimentation, iteration, and continuous improvement.
+
+***What are the benefits of MLOps?***
+MLOps offers key benefits like efficiency, scalability, and risk reduction. It makes model development faster, improves model quality, and speeds up deployment. MLOps supports scaling by allowing thousands of models to be managed and monitored through CI/CD pipelines. It also improves collaboration between teams and helps with the reproducibility of ML pipelines. In terms of risk reduction, MLOps ensures models comply with regulations, enhances transparency, and provides quicker responses to policy and regulatory needs.
+
+***What are the key components of MLOps?***
+The components of MLOps can be visualize and described as follows:
+- Exploratory data analysis (EDA)
+- Data Prep and Feature Engineering
+- Model training and tuning
+- Model review and governance
+- Model inference and serving
+- Model monitoring
+- Automated model retraining
+
+
+![Sample Image](./figures/2.jpg)
+[reference](https://www.databricks.com/glossary/mlops)
+
+
+A common life cycle of MLOps engineering is visualize below:
+
+![Sample Image](./figures/1.png)
+[reference](https://www.databricks.com/glossary/mlops)
+
 
 
 
@@ -96,4 +125,6 @@ Feel free to explore the repository and make use of the resources provided to en
 
 
 References:
+
+- https://www.databricks.com/glossary/mlops
 - https://medium.com/israeli-tech-radar/machine-learning-model-serving-overview-c01a6aa3e823
