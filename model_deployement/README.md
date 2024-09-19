@@ -1,5 +1,70 @@
-# Handling Server
+# Model Deployment
+There are several ways to deploy a model. Some of the popular ways are as follows:
 
+1. **REST API Frameworks**: 
+   - **FastAPI**, **Flask**, **Django**
+2. **Advanced Platforms**:
+    - **Seldon Core**: Kubernetes-native platform for deploying, scaling, and managing thousands of models.
+    - **Kubeflow**: End-to-end orchestration for machine learning workflows on Kubernetes.
+    - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
+    - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
+
+
+# Choice of Framework
+
+### 1. **REST API Frameworks**:
+   - **FastAPI**, **Flask**, **Django**
+
+**When to Use**:
+- **Small to Medium Applications**: When deploying a few machine learning models or building a prototype.
+- **Lightweight Applications**: When you need to expose your ML model as an API quickly with minimal infrastructure.
+- **Quick Development**: Ideal when the focus is on developing and testing APIs without needing advanced scalability features.
+
+**Pros**:
+- **Simple Setup**: Easy to develop and deploy small-scale applications.
+- **Flexible**: Can easily integrate with other services (databases, frontends, etc.).
+- **Great for Prototyping**: Quickly deploy models for testing or demonstration.
+- **Community Support**: Popular frameworks with a large ecosystem of libraries and support.
+
+**Cons**:
+- **Limited Scalability**: Not ideal for large-scale or high-traffic applications.
+- **Manual Scaling**: Requires manual intervention for scaling, orchestration, and monitoring.
+- **Lacks Advanced Features**: No built-in model versioning, A/B testing, or advanced deployment strategies.
+
+### 2. **Advanced Platforms**:
+   - **Seldon Core**: Kubernetes-native platform for deploying, scaling, and managing thousands of models.
+   - **Kubeflow**: End-to-end orchestration for machine learning workflows on Kubernetes.
+   - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
+   - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
+
+**When to Use**:
+- **Large-Scale Applications**: Ideal when deploying, scaling, and managing many models in production.
+- **Model Lifecycle Management**: When you need features like model versioning, monitoring, and A/B testing.
+- **Kubernetes Environments**: When using Kubernetes for orchestration and require a Kubernetes-native platform for scaling.
+- **CI/CD Pipelines**: When automating the continuous integration and deployment of ML models with multiple pipelines.
+
+**Pros**:
+- **Scalability**: Can handle thousands of models, ensuring automated scaling, versioning, and management.
+- **Model Management**: Built-in features for model lifecycle management (versioning, rolling updates, A/B testing).
+- **Automation**: Integrates with CI/CD pipelines, automating deployment and monitoring processes.
+- **High Performance**: Optimized for production environments with high availability and low-latency inference.
+
+**Cons**:
+- **Complex Setup**: Requires significant knowledge of Kubernetes and can be challenging to set up.
+- **Overkill for Small Projects**: These platforms may add unnecessary complexity and overhead for small-scale deployments.
+- **Resource-Intensive**: Requires more infrastructure and resources, especially for larger clusters.
+
+---
+
+## Summary
+
+- **Use REST API Frameworks** (FastAPI, Flask, Django):
+   - Ideal for quick deployment of a few models, prototyping, or building small to medium-scale applications.
+   - Best for cases where you don't need to manage hundreds of models or require advanced scalability.
+
+- **Use Advanced Platforms** (Seldon Core, Kubeflow, TensorFlow Serving, TorchServe):
+   - Suitable for large-scale applications with multiple models requiring full automation, scaling, and management.
+   - Best when using Kubernetes and need advanced model management features like versioning, A/B testing, and monitoring.
 
 
 
@@ -108,5 +173,3 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
 
 
 
-References:
-- https://medium.com/israeli-tech-radar/machine-learning-model-serving-overview-c01a6aa3e823
