@@ -1,6 +1,13 @@
 # MLops Engineer
 MLOps, short for Machine Learning Operations, is a key aspect of Machine Learning engineering that focuses on efficiently deploying machine learning models into production and ensuring their ongoing maintenance and monitoring. It is a collaborative effort that typically involves data scientists, DevOps engineers, and IT professionals working together.
 
+
+![Sample Image](./img/6.png)
+A paper published on [reference](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf) shows the Hidden Technical Debt in Machine Learning Systems. The paper discusses the challenges of deploying machine learning systems in production and the hidden technical debt that can accumulate over time. MLOps aims to address these challenges by providing best practices and tools for managing machine learning models in production.
+
+
+
+
 In this repository, we will cover various aspects of MLOps, including best practices, tools, and techniques for deploying, monitoring, and managing machine learning models in production. We will explore topics from backeend development to front-end development, and from data management to model training and validation. Moreover, we will also explore continuous integration and continuous deployment (CI/CD), model versioning, containerization, orchestration, and monitoring.
 
 ## Contents
@@ -16,7 +23,7 @@ As machine learning and AI become more common in software, we need to create goo
 
 A common life cycle of MLOps engineering is visualize below:
 
-![Sample Image](./figures/1.png)
+![Sample Image](./img/1.png)
 
 [reference](https://www.databricks.com/glossary/mlops)
 
@@ -33,6 +40,7 @@ MLOps offers key benefits like efficiency, scalability, and risk reduction. It m
 
 ***What are the key components of MLOps?***
 The components of MLOps can be visualize and described as follows:
+
 - Exploratory data analysis (EDA)
 - Data Prep and Feature Engineering
 - Model training and tuning
@@ -42,7 +50,7 @@ The components of MLOps can be visualize and described as follows:
 - Automated model retraining
 
 
-![Sample Image](./figures/2.png)
+![Sample Image](./img/2.png)
 
 [reference](https://www.databricks.com/glossary/mlops)
 
@@ -51,11 +59,6 @@ The components of MLOps can be visualize and described as follows:
 
 
 
-Hidden Technical Debt in Machine Learning Systems
-
-
-![Sample Image](./figures/6.png)
-[reference](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
 
 
 According to SIG MLOps(Special Interest Group for Machine Learning Operations), the best MLOps setup is one where machine learning models are handled just like any other software in a CI/CD(continous Integration/Continous Development) system. THese models are deployed alongside the services that use them, as part of a smooth release process. By following these practices, we aim to speed up the use of AI in software and deliver smarter software faster. Below, we explain key ideas in MLOps, such as step-by-step development, automation, continous development, version control, testing, reproducibility, and monitoring. 
