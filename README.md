@@ -14,13 +14,17 @@ According to SIG MLOps(Special Interest Group for Machine Learning Operations), 
 
 In this repository, we will cover various aspects of MLOps, including best practices, tools, and techniques for deploying, monitoring, and managing machine learning models in production. We will explore topics from backeend development to front-end development, and from data management to model training and validation. Moreover, we will also explore continuous integration and continuous deployment (CI/CD), model versioning, containerization, orchestration, and monitoring.
 
+
+---
+
+
 ## Contents
 1. [Introduction](#introduction)
 2. [Process and TOOLs for MLOps](#Process-and-TOOLs-for-MLOps)
 3. [MLOps Architecture](#MLOps-Architecture)
 
 
-
+---
 
 ## Introduction
 As machine learning and AI become more common in software, we need to create good practices and tools to help test, deploy, manage, and monitor these models in real-life situations. This is where MLOps comes in, helping to prevent pproblems in machine elarning applications.
@@ -63,7 +67,7 @@ The components of MLOps can be visualize and described as follows:
 [reference](https://www.databricks.com/glossary/mlops)
 
 
-######################################################################################
+---
 
 ## Process and TOOLs for MLOps
 
@@ -141,7 +145,7 @@ The components of MLOps can be visualize and described as follows:
 [Reference](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
 
-#########################################################################################
+---
 
 ## MLOps Architecture
 In the following section we will focus on main components of MLOps architecture. The main components of MLOps architecture are as follows:
@@ -159,7 +163,7 @@ In the following section we will focus on main components of MLOps architecture.
 
 [Reference](https://www.igmguru.com/blog/machine-learning-operations-mlops-overview-definition-and-architecture)
 
-
+---
 
 References:
 
