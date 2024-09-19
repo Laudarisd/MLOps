@@ -14,7 +14,6 @@ In this repository, we will cover various aspects of MLOps, including best pract
 ## Contents
 1. [Introduction](#introduction)
 2. [Process and TOOLs for MLOps](#Process-and-TOOLs-for-MLOps)
-3. [Skills to be a Full MLops Engineer](#skills-to-be-a-full-mlops-engineer)
 
 
 
@@ -125,6 +124,12 @@ The components of MLOps can be visualize and described as follows:
 
 
 
+<div align="center">
+  <img src="./img/1.webp" alt="Sample Image" width="500">
+  <p><em>Comparison of deployment platforms for machine learning models, highlighting the trade-offs between customization and out-of-the-box capabilities.</em></p>
+</div>
+
+[Reference](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
 
 
