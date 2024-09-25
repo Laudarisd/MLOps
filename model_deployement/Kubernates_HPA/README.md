@@ -50,3 +50,14 @@ In  Kubernates, a horizontalPodAutoscaler automatically scales the number of pod
 5. **Monitor and Manage Scaling**:
 
 - The HPA will automatically scale the number of pods based on the load. You can monitor the number of pods and the resource usage using Kubernetes dashboards or command-line tools like kubectl.
+
+
+
+---
+
+
+
+## References:
+
+- [minikube](https://minikube.sigs.k8s.io/docs/tutorials/multi_node/)
+- [Kubernates(Horizontal Pod Autoscaling)](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/)
