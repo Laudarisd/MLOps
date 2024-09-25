@@ -31,7 +31,17 @@ In  Kubernates, a horizontalPodAutoscaler automatically scales the number of pod
 
 1. **Set Up Kubernetes Cluster**:
 
-- First, you need a running Kubernetes cluster. This can be done locally using tools like Minikube or in the cloud using platforms like Google Kubernetes Engine (GKE), Amazon EKS, or Azure AKS.
+- First, you need a running Kubernetes cluster. This can be done locally using tools like Minikube or in the cloud using platforms like Google Kubernetes Engine (GKE), Amazon EKS, or Azure AKS. For this example, we will use Minikube to set up a local Kubernetes cluster.
+
+- Install Minikube by following the instructions in the [Minikube documentation](https://minikube.sigs.k8s.io/docs/start/).
+
+
+Minikubes helps to create a multi-node cluster with the following command:
+    
+    ```bash
+    minikube start --nodes 3
+    ```
+
 
 2. **Containerize Your Application**:
 
