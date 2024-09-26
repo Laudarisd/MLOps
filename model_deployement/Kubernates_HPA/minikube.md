@@ -539,10 +539,12 @@ If Minikube cannot open the URL in a browser, it will show how we can access the
 
 or 
     
-    ```bash
-    minikube service aice-test --url
-    ```
-    This command will return the URL of the Nginx service, which you can access in a web browser.
+```bash
+minikube service aice-test --url
+```
+
+
+This command will return the URL of the Nginx service, which you can access in a web browser.
 
 
 - **Delete the deployment**:
