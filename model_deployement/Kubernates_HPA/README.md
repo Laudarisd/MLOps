@@ -60,10 +60,9 @@ Minikubes helps to create a multi-node cluster with the following command:
 5. **Monitor and Manage Scaling**:
 
 - The HPA will automatically scale the number of pods based on the load. You can monitor the number of pods and the resource usage using Kubernetes dashboards or command-line tools like kubectl.
-
-
-
 ---
+
+For detail installation of Minikube refer to [minicube](./minikube.md)
 
 
 
