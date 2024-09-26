@@ -461,7 +461,109 @@ And many more...
 To much explanation on the same topic is not good. Let's move to the next topic.
 
 
-## Let's practice with an application
+# Let's practice with an application
+
+I hade create aice cluster so I am going to delete it and start from the beginning.
+
+First let's delete and check the status of the cluster:
+
+```bash
+minikube stop -p aice
+```
+
+```bash
+minilube delete -p aice
+```
+
+```bash
+minikube status -p aice
+
+# this should give as below
+🤷  Profile "aice" not found. Run "minikube profile list" to view all profiles.
+👉  To start a cluster, run: "minikube start -p aice"
+```
+
+
+If you are starting a new cluster then follow this steps to create a new cluster and deploy an app in ngnix. I am not going to explian the steps in detail as I have already explained above.
+
+
+
+
+- **Create the cluster**:
+
+```bash 
+minikube start -p aice --nodes 2 # if you want nodes to be 2
+``` 
+
+- **Verify the cluster**:
+
+After cluster is created we use kubectl because kubectl is the command-line tool for interacting with the Kubernetes API server. It allows us to run commands against Kubernetes clusters to deploy applications, inspect resources, and manage the cluster.
+
+```bash
+kubectl get nodes
+```
+
+- **Deploy an application**:
+Now, we will create an aice-test deployment using the following command:
+
+```bash
+kubectl create deployment aice-test --image=nginx
+```
+
+- **Check the pods**:
+`Pod` is the smallest deployable unit in Kubernetes. A Pod represents a single instance of a running process in the cluster. Pods contain one or more containers, such as Docker containers. We can check the pods using the following command:
+
+```bash
+kubectl get pods
+```
+
+- **Expose the deployment**:
+To make the Nginx deployment accessible from outside the cluster, we need to expose it as a service. We can do this using the following command:
+
+```bash
+kubectl expose deployment aice-test --port=80 --type=NodePort
+```
+
+- **Check the service**:
+
+```bash
+kubectl get services
+```
+
+
+- **Access the Nginx service**:
+```bash
+minikube service aice-test -p aice
+```
+If Minikube cannot open the URL in a browser, it will show how we can access the service using the IP address and port number.
+
+or 
+    
+    ```bash
+    minikube service aice-test --url
+    ```
+    This command will return the URL of the Nginx service, which you can access in a web browser.
+
+
+- **Delete the deployment**:
+To delete the deployment and service, you can use the following commands:
+
+```bash
+kubectl delete deployment aice-test
+kubectl delete service aice-test
+```
+
+- **Stop and delete the cluster**:
+Once you are done testing, you can stop and delete the Minikube cluster using the following commands:
+
+```bash
+minikube stop -p aice
+minikube delete -p aice
+```
+
+
+---
+
 
 
 
