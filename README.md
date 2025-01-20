@@ -273,11 +273,98 @@ In a typical **cloud-based MLOps** workflow, the process involves:
 - **Flexibility**: Choose from various tools and services, enabling hybrid architectures across cloud platforms.
 - **Seamless Integration**: Integrate with other cloud-native services like storage, databases, and CI/CD pipelines.
 
+---
+
+
+# MLOps Maturity Levels
+
+MLOps consists of three maturity levels, each representing a step towards more automation, scalability, and robustness in machine learning (ML) workflows. Understanding these levels helps organizations assess their current capabilities and plan improvements.
 
 ---
+
+## **Level 0: Manual Process**
+
+At this stage, ML workflows are mostly manual, with minimal integration or automation. This is often the starting point for organizations beginning their ML journey.
+
+### **Characteristics:**
+- Data collection, preprocessing, model training, and deployment are manual.
+- No version control for datasets, models, or code.
+- Model deployment is a one-time activity without a feedback loop.
+- Collaboration is limited, often siloed between data scientists and operations teams.
+
+### **Challenges:**
+- Lack of reproducibility: Results are difficult to replicate.
+- Time-consuming and error-prone processes.
+- Scalability issues due to manual effort.
+
+---
+
+## **Level 1: Automation of ML Pipelines**
+
+This level introduces automation into key stages of the ML lifecycle, improving reproducibility and collaboration.
+
+### **Characteristics:**
+- Automated data preprocessing, model training, and evaluation pipelines.
+- Experiment tracking for hyperparameters, metrics, and artifacts (e.g., using MLflow or Weights & Biases).
+- Version control for code and models using Git or DVC.
+- CI/CD pipelines for automating testing and deployment of models.
+- Basic monitoring of model performance in production.
+
+### **Advantages:**
+- Faster iteration cycles and deployment times.
+- Reproducibility of experiments and results.
+- Collaboration between data scientists and operations teams is improved.
+
+### **Tools:**
+- **Experiment Tracking:** MLflow, Neptune, Weights & Biases.
+- **Workflow Orchestration:** Kubeflow, Apache Airflow.
+- **CI/CD:** Jenkins, GitHub Actions, GitLab CI/CD.
+
+---
+
+## **Level 2: Full Automation (CI/CD/CT for ML)**
+
+The highest level of MLOps maturity features full end-to-end automation, including continuous training (CT). Systems are designed for scalability, governance, and minimal manual intervention.
+
+### **Characteristics:**
+- Fully automated workflows for data ingestion, model training, testing, and deployment.
+- Continuous integration (CI), continuous deployment (CD), and continuous training (CT).
+- Advanced monitoring for data drift, model drift, and system anomalies.
+- Scalable infrastructure using Kubernetes or cloud-native services.
+- Model registry for versioning, governance, and lifecycle management.
+- Governance mechanisms for compliance and auditability.
+
+### **Advantages:**
+- Highly scalable and reliable ML systems.
+- Minimal manual intervention, reducing human error.
+- Proactive detection and mitigation of performance issues.
+- Seamless collaboration across teams with well-defined processes.
+
+### **Tools:**
+- **Orchestration:** Kubeflow, Argo Workflows.
+- **Model Monitoring:** Evidently AI, Prometheus, Grafana.
+- **Model Registry:** MLflow Model Registry, Seldon Core.
+- **Scaling:** Kubernetes, AWS SageMaker, GCP Vertex AI.
+
+---
+
+## **Comparison of MLOps Levels**
+
+| Feature                       | Level 0: Manual Process         | Level 1: Automated Pipelines     | Level 2: Full Automation         |
+|-------------------------------|----------------------------------|----------------------------------|----------------------------------|
+| **Data Preprocessing**        | Manual                          | Automated                        | Fully Automated                  |
+| **Experiment Tracking**       | None                            | Basic Tracking                   | Advanced Tracking                |
+| **Deployment**                | Manual                          | Automated Deployment             | Continuous Deployment            |
+| **Monitoring**                | None                            | Basic Monitoring                 | Advanced Monitoring              |
+| **Scalability**               | Low                             | Moderate                         | High                             |
+| **Collaboration**             | Limited                         | Improved                         | Seamless                         |
+
+---
+
 
 
 References:
 
 - https://www.databricks.com/glossary/mlops
 - https://medium.com/israeli-tech-radar/machine-learning-model-serving-overview-c01a6aa3e823
+- https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#:~:text=The%20following%20sections%20describe%20three,ML%20and%20CI%2FCD%20pipelines.
