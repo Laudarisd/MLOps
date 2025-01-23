@@ -40,8 +40,8 @@ jobs:
             exit $?
           fi
 
-  merge-to-main:
-    name: Merge to Main
+  merge-and-deploy:
+    name: Merge and Deploy
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.ref == 'refs/heads/dev'
@@ -58,21 +58,34 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-      - name: Fetch all branches
+      - name: Merge dev into main
         run: |
           git fetch origin
-          
-      - name: Create main branch if it doesn't exist
-        run: |
-          if ! git show-ref --verify refs/remotes/origin/main; then
-            echo "Creating main branch..."
-            git checkout -b main
-            git push -u origin main
-          else
-            git checkout main || git checkout -b main origin/main
-          fi
-          
-      - name: Merge to Main
-        run: |
-          git merge --no-ff dev -m "Merge dev into main"
+          git checkout main
+          git pull origin main
+          git merge --no-ff origin/dev -m "Merge dev into main"
           git push origin main
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.name of ssh key from repo setting and don't forget to copy ssh key from local pc to this repo }}
+
+      - name: Deploy to Remote Server
+        run: |
+          ssh -o StrictHostKeyChecking=no user@XX.XX.XXX.XXX << 'EOF'
+            cd /mnt/sdb/sudip/ci_deployment/samsung-main
+            git fetch origin main
+            git reset --hard origin/main
+            
+            # Activate virtual environment if you're using one
+            source venv/bin/activate
+            
+            # Install any new dependencies
+            pip install -r requirements.txt
+            
+            # Restart your FastAPI application
+            sudo systemctl restart your_fastapi_service
+            
+            echo "Deployment successful!"
+          EOF
