@@ -59,82 +59,89 @@ def write_number(num):
 # Generate a random commit message using LLM
 def generate_random_commit_message():
     try:
+        # Initialize LLM pipeline
         generator = pipeline("text-generation", model="openai-community/gpt2")
+
+        # Generate the commit message
         generated = generator(COMMIT_MESSAGE_PROMPT, max_new_tokens=50, num_return_sequences=1, temperature=0.9, top_k=50, top_p=0.9, truncation=True)
         text = generated[0]["generated_text"]
+
+        # Check if a valid commit message is generated
         if "- " in text:
-            return text.rsplit("- ", 1)[-1].strip()
+            # Extract the commit message by splitting the generated text
+            commit_message = text.rsplit("- ", 1)[-1].strip()
+            logging.info(f"Generated commit message: {commit_message}")
+            return commit_message
         else:
-            raise ValueError("Unexpected generated text")
+            # Fallback if the generated message isn't valid
+            logging.warning("Generated message is invalid, using default commit message.")
+            return f"Update number: {datetime.now().strftime('%Y-%m-%d')}"
     except Exception as e:
         logging.error(f"Error generating commit message: {e}")
+        # Fallback if an error occurs
         return f"Update number: {datetime.now().strftime('%Y-%m-%d')}"
 
 # Run a subprocess command and handle errors
 def run_subprocess(command):
     try:
-        result = subprocess.run(["git", "push", "--no-verify"], check=True)
-
-        logging.info(result.stdout)
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+        logging.info(f"Command output: {result.stdout}")
         return result
     except subprocess.CalledProcessError as e:
         logging.error(f"Error occurred during subprocess execution: {e.stderr}")
         sys.exit(1)
 
-# Commit the changes with a generated or default message
-def git_commit():
-    run_subprocess(["git", "add", os.path.join(REPO_DIR, NUMBER_FILE)])
+# Perform the git commit and push
+def git_commit_and_push():
+    # Prepare the git commit command
+    subprocess.run(["git", "add", os.path.join(REPO_DIR, NUMBER_FILE)], check=True)
 
-    commit_message = generate_random_commit_message()
-    run_subprocess(["git", "commit", "-m", commit_message])
+    # Decide commit message based on the LLM environment variable
+    if "FANCY_JOB_USE_LLM" in os.environ and os.environ["FANCY_JOB_USE_LLM"].lower() == "true":
+        commit_message = generate_random_commit_message()
+    else:
+        commit_message = f"Update number: {datetime.now().strftime('%Y-%m-%d')}"
 
-# Push the changes to the remote repository
-def git_push():
-    result = run_subprocess(["git", "push"])
+    # Commit with the generated message
+    subprocess.run(["git", "commit", "-m", commit_message], check=True)
+
+    # Push the changes to GitHub
+    result = run_subprocess(["git", "push", "--no-verify"])
+
     if result.returncode == 0:
         logging.info("Changes pushed to GitHub successfully.")
     else:
         logging.error("Error pushing to GitHub.")
         sys.exit(1)
 
-# Update cron or Task Scheduler with a random time
-def update_task_scheduler():
-    random_hour = random.randint(0, 23)
-    random_minute = random.randint(0, 59)
+# Schedule the task on Windows
+def schedule_task():
+    try:
+        random_hour = random.randint(0, 23)
+        random_minute = random.randint(0, 59)
+        schedule_command = f"SchTasks /Create /SC DAILY /TN AutoGitCommit /TR 'python {os.path.abspath(__file__)}' /ST {random_hour:02d}:{random_minute:02d}"
 
-    if sys.platform.startswith("linux") or sys.platform == "darwin":
-        # Linux/macOS Crontab Update
-        cron_file = os.path.expanduser("~/.crontab")
-        cron_job = f"{random_minute} {random_hour} * * * /usr/bin/python3 {os.path.join(REPO_DIR, 'update_number.py')}\n"
-        try:
-            with open(cron_file, "a") as crontab:
-                crontab.write(cron_job)
-            logging.info(f"Task scheduled on {random_hour}:{random_minute} via cron.")
-        except Exception as e:
-            logging.error(f"Failed to update crontab: {e}")
-            sys.exit(1)
-    elif sys.platform == "win32":
-        # Windows Task Scheduler Update
-        try:
-            task_name = "AutoGitCommit"
-            run_subprocess(["schtasks", "/create", "/tn", task_name, "/tr", f"python3 {os.path.join(REPO_DIR, 'update_number.py')}", "/sc", "daily", "/st", f"{random_hour:02}:{random_minute:02}"])
-            logging.info(f"Task scheduled on {random_hour}:{random_minute} via Windows Task Scheduler.")
-        except Exception as e:
-            logging.error(f"Failed to update Windows Task Scheduler: {e}")
-            sys.exit(1)
+        # Schedule task with Windows Task Scheduler
+        result = subprocess.run(schedule_command, capture_output=True, text=True, shell=True)
 
-def main():
-    set_working_directory()
-    
-    current_number = read_number()
-    logging.info(f"Current number: {current_number}")
-    
-    new_number = current_number + 1
-    write_number(new_number)
-
-    git_commit()
-    git_push()
-    update_task_scheduler()
+        if result.returncode == 0:
+            logging.info(f"Task scheduled at {random_hour:02d}:{random_minute:02d} via Windows Task Scheduler.")
+        else:
+            logging.error(f"Error scheduling task: {result.stderr}")
+    except Exception as e:
+        logging.error(f"Error scheduling task: {e}")
+        sys.exit(1)
 
 if __name__ == "__main__":
-    main()
+    set_working_directory()
+
+    # Read the current number, increment it, and write it back
+    current_number = read_number()
+    logging.info(f"Current number: {current_number}")
+    write_number(current_number + 1)
+
+    # Commit and push the changes to GitHub
+    git_commit_and_push()
+
+    # Schedule the task for the next run
+    schedule_task()
