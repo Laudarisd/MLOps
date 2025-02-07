@@ -3,153 +3,138 @@ import os
 import sys
 import random
 import subprocess
+import logging
 from datetime import datetime
+from transformers import pipeline
+
+# Configure logging
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+
+# Constants
+REPO_DIR = r"D:\workspace\personal\git_management\MLOps"
+NUMBER_FILE = "number.txt"
+GIT_REPO_URL = "https://github.com/Laudarisd/MLOps.git"
+COMMIT_MESSAGE_PROMPT = """
+    Generate a Git commit message following the Conventional Commits standard. The message should include a type, an optional scope, and a subject. Please keep it short. Here are some examples:
+    - feat(auth): add user authentication module
+    - fix(api): resolve null pointer exception in user endpoint
+    - docs(readme): update installation instructions
+    - chore(deps): upgrade lodash to version 4.17.21
+    - refactor(utils): simplify date formatting logic
+
+    Now, generate a new commit message:
+"""
 
 # Force the script to always run from the correct repo
-script_dir = r"D:\workspace\personal\git_management\MLOps"
-os.chdir(script_dir)
+def set_working_directory():
+    try:
+        os.chdir(REPO_DIR)
+        logging.info(f"Working directory set to: {REPO_DIR}")
+    except Exception as e:
+        logging.error(f"Failed to change directory: {e}")
+        sys.exit(1)
 
-# Debugging
-print(f"Script directory forced to: {script_dir}")
-print(f"After changing, Current working directory: {os.getcwd()}")
-
-# Debugging: Print the directories
-print(f"Script directory: {script_dir}")
-print(f"Before changing, Current working directory: {os.getcwd()}")
-
-# Change to the script directory
-os.chdir(script_dir)
-
-# Debugging: Verify the directory change
-print(f"After changing, Current working directory: {os.getcwd()}")
-
-
+# Read the number from the file
 def read_number():
-    with open(os.path.join(script_dir, "number.txt"), "r") as f:
-        return int(f.read().strip())
+    try:
+        with open(os.path.join(REPO_DIR, NUMBER_FILE), "r") as f:
+            return int(f.read().strip())
+    except FileNotFoundError:
+        logging.error(f"{NUMBER_FILE} not found. Please ensure the file exists.")
+        sys.exit(1)
+    except ValueError:
+        logging.error("Invalid value in number.txt, expected an integer.")
+        sys.exit(1)
 
-
+# Write the updated number to the file
 def write_number(num):
-    with open(os.path.join(script_dir, "number.txt"), "w") as f:
-        f.write(str(num))
+    try:
+        with open(os.path.join(REPO_DIR, NUMBER_FILE), "w") as f:
+            f.write(str(num))
+        logging.info(f"Number updated to: {num}")
+    except Exception as e:
+        logging.error(f"Failed to write to {NUMBER_FILE}: {e}")
+        sys.exit(1)
 
-
+# Generate a random commit message using LLM
 def generate_random_commit_message():
-    from transformers import pipeline
+    try:
+        generator = pipeline("text-generation", model="openai-community/gpt2")
+        generated = generator(COMMIT_MESSAGE_PROMPT, max_new_tokens=50, num_return_sequences=1, temperature=0.9, top_k=50, top_p=0.9, truncation=True)
+        text = generated[0]["generated_text"]
+        if "- " in text:
+            return text.rsplit("- ", 1)[-1].strip()
+        else:
+            raise ValueError("Unexpected generated text")
+    except Exception as e:
+        logging.error(f"Error generating commit message: {e}")
+        return f"Update number: {datetime.now().strftime('%Y-%m-%d')}"
 
-    generator = pipeline(
-        "text-generation",
-        model="openai-community/gpt2",
-    )
-    prompt = """
-        Generate a Git commit message following the Conventional Commits standard. The message should include a type, an optional scope, and a subject.Please keep it short. Here are some examples:
+# Run a subprocess command and handle errors
+def run_subprocess(command):
+    try:
+        result = subprocess.run(["git", "push", "--no-verify"], check=True)
 
-        - feat(auth): add user authentication module
-        - fix(api): resolve null pointer exception in user endpoint
-        - docs(readme): update installation instructions
-        - chore(deps): upgrade lodash to version 4.17.21
-        - refactor(utils): simplify date formatting logic
+        logging.info(result.stdout)
+        return result
+    except subprocess.CalledProcessError as e:
+        logging.error(f"Error occurred during subprocess execution: {e.stderr}")
+        sys.exit(1)
 
-        Now, generate a new commit message:
-    """
-    generated = generator(
-        prompt,
-        max_new_tokens=50,
-        num_return_sequences=1,
-        temperature=0.9,
-        top_k=50,
-        top_p=0.9,
-        truncation=True,
-    )
-    text = generated[0]["generated_text"]
-
-    if "- " in text:
-        return text.rsplit("- ", 1)[-1].strip()
-    else:
-        raise ValueError(f"Unexpected generated text {text}")
-
-
+# Commit the changes with a generated or default message
 def git_commit():
-    subprocess.run(["git", "add", os.path.join(script_dir, "number.txt")], check=True)
+    run_subprocess(["git", "add", os.path.join(REPO_DIR, NUMBER_FILE)])
 
-    if "FANCY_JOB_USE_LLM" in os.environ:
-        commit_message = generate_random_commit_message()
-    else:
-        date = datetime.now().strftime("%Y-%m-%d")
-        commit_message = f"Update number: {date}"
+    commit_message = generate_random_commit_message()
+    run_subprocess(["git", "commit", "-m", commit_message])
 
-    subprocess.run(["git", "commit", "-m", commit_message], check=True)
-
-
+# Push the changes to the remote repository
 def git_push():
-    result = subprocess.run(["git", "push"], capture_output=True, text=True)
+    result = run_subprocess(["git", "push"])
     if result.returncode == 0:
-        print("Changes pushed to GitHub successfully.")
+        logging.info("Changes pushed to GitHub successfully.")
     else:
-        print("Error pushing to GitHub:")
-        print(result.stderr)
+        logging.error("Error pushing to GitHub.")
+        sys.exit(1)
 
-
-def update_cron_with_random_time():
-    """Schedules the script using crontab on Linux/macOS or Task Scheduler on Windows."""
-
+# Update cron or Task Scheduler with a random time
+def update_task_scheduler():
     random_hour = random.randint(0, 23)
     random_minute = random.randint(0, 59)
 
     if sys.platform.startswith("linux") or sys.platform == "darwin":
-        # **Linux/macOS Crontab Update**
-        cron_file = os.path.join(script_dir, "current_cron.txt")
-
-        new_cron_command = f"{random_minute} {random_hour} * * * cd {script_dir} && python3 {os.path.join(script_dir, 'update_number.py')}\n"
-
-        os.system(f"crontab -l > {cron_file} 2>/dev/null || true")
-
-        with open(cron_file, "r") as file:
-            lines = file.readlines()
-
-        with open(cron_file, "w") as file:
-            for line in lines:
-                if "update_number.py" not in line:
-                    file.write(line)
-            file.write(new_cron_command)
-
-        os.system(f"crontab {cron_file}")
-        os.remove(cron_file)
-
-        print(f"[Linux/macOS] Cron job updated to run at {random_hour}:{random_minute}.")
-
+        # Linux/macOS Crontab Update
+        cron_file = os.path.expanduser("~/.crontab")
+        cron_job = f"{random_minute} {random_hour} * * * /usr/bin/python3 {os.path.join(REPO_DIR, 'update_number.py')}\n"
+        try:
+            with open(cron_file, "a") as crontab:
+                crontab.write(cron_job)
+            logging.info(f"Task scheduled on {random_hour}:{random_minute} via cron.")
+        except Exception as e:
+            logging.error(f"Failed to update crontab: {e}")
+            sys.exit(1)
     elif sys.platform == "win32":
-        # **Windows Task Scheduler Update**
-        task_name = "AutoGitCommit"
-        script_path = os.path.abspath(__file__)
-
-        print(f"[Windows] Scheduling task at {random_hour:02}:{random_minute:02}")
-
-        # Remove the old scheduled task if it exists
-        subprocess.run(f'schtasks /delete /tn "{task_name}" /f', shell=True)
-
-        # Create a new scheduled task
-        command = f'schtasks /create /tn "{task_name}" /tr "python {script_path}" /sc daily /st {random_hour:02}:{random_minute:02}"'
-        subprocess.run(command, shell=True)
-
-        print(f"[Windows] Task scheduled to run daily at {random_hour:02}:{random_minute:02}.")
-    else:
-        print("Unsupported OS: Cannot schedule tasks.")
-
-
+        # Windows Task Scheduler Update
+        try:
+            task_name = "AutoGitCommit"
+            run_subprocess(["schtasks", "/create", "/tn", task_name, "/tr", f"python3 {os.path.join(REPO_DIR, 'update_number.py')}", "/sc", "daily", "/st", f"{random_hour:02}:{random_minute:02}"])
+            logging.info(f"Task scheduled on {random_hour}:{random_minute} via Windows Task Scheduler.")
+        except Exception as e:
+            logging.error(f"Failed to update Windows Task Scheduler: {e}")
+            sys.exit(1)
 
 def main():
-    try:
-        current_number = read_number()
-        new_number = current_number + 1
-        write_number(new_number)
-        git_commit()
-        git_push()
-        update_cron_with_random_time()
-    except Exception as e:
-        print(f"Error: {str(e)}")
-        exit(1)
+    set_working_directory()
+    
+    current_number = read_number()
+    logging.info(f"Current number: {current_number}")
+    
+    new_number = current_number + 1
+    write_number(new_number)
 
+    git_commit()
+    git_push()
+    update_task_scheduler()
 
 if __name__ == "__main__":
     main()
