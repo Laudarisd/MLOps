@@ -266,3 +266,9 @@ kubectl apply -f aice-hpa.yaml
 ```
 
 
+
+- Verify the HPA
+
+```bash
+kubectl get hpa
+```
