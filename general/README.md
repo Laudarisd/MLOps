@@ -1,16 +1,16 @@
-# 🛠️ Infrastructure Engineer Interview Preparation Guide
-### Target Role: Infrastructure Engineer (Linux, Red Hat OpenShift, Windows Server, Automation, Networking, Security)
-This guide prepares candidates for infrastructure engineering interviews, focusing on practical, hands-on skills in Linux (Red Hat Enterprise Linux - RHEL), Windows Server, Red Hat OpenShift, automation (Ansible, Python, Bash, PowerShell), virtualization (VMware ESXi), endpoint management (Microsoft System Center Configuration Manager - SCCM/Microsoft Intune), log analysis (Splunk/Elastic Stack - ELK), networking (Cisco), Closed-Circuit Television (CCTV)/Video Management Systems (VMS), Information Technology Infrastructure Library (ITIL)/Agile methodologies, and decision-making. The focus is on operational readiness, ensuring robust, maintainable, and secure systems before pursuing innovation.
+# 🛠️ Infrastructure Engineer: Preparation Guide
+### Infrastructure Engineer (Linux, Red Hat OpenShift, Windows Server, Automation, Networking, Security)
+This guide prepares for infrastructure engineering role, focusing on practical, hands-on skills in Linux (Red Hat Enterprise Linux - RHEL), Windows Server, Red Hat OpenShift, automation (Ansible, Python, Bash, PowerShell), virtualization (VMware ESXi), endpoint management (Microsoft System Center Configuration Manager - SCCM/Microsoft Intune), log analysis (Splunk/Elastic Stack - ELK), networking (Cisco), Closed-Circuit Television (CCTV)/Video Management Systems (VMS), Information Technology Infrastructure Library (ITIL)/Agile methodologies, and decision-making. The focus is on operational readiness, ensuring robust, maintainable, and secure systems before pursuing innovation.
 
-📌 Purpose
+# 📌 Purpose
 Equip candidates with practical skills to manage enterprise infrastructure, emphasizing stability, scalability, and security. The guide prioritizes operational excellence, ensuring systems are reliable and well-documented before introducing new technologies.
 
-✅ Chapter 1: Linux Fundamentals & System Administration
-Goal: Master Linux server management, focusing on Red Hat Enterprise Linux (RHEL).
+# ✅ Chapter 1: Linux Fundamentals & System Administration
+### Goal: Master Linux server management, focusing on Red Hat Enterprise Linux (RHEL).
 Overview: Linux, particularly RHEL, is a cornerstone of enterprise infrastructure due to its stability, security, and support. System administration involves managing file systems, users, permissions, processes, services, and subscriptions to ensure reliable, secure operations. Mastery of these tasks ensures servers run smoothly, supporting critical applications.
 What to Know
 
-File System: Commands like ls (list directory contents), cd (change directory), find (search files), du (disk usage), df (disk free space) manage file operations.
+### File System: Commands like ls (list directory contents), cd (change directory), find (search files), du (disk usage), df (disk free space) manage file operations.
 Task: Navigate, organize, and monitor file systems.
 Importance: Ensures efficient storage management and quick access to files, critical for system maintenance and troubleshooting.
 
