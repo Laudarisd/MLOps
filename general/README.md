@@ -1460,223 +1460,151 @@ ntdsutil snapshot "create" quit quit
 ---
 
 
+
 ✅ Chapter 12: Microsoft System Center Configuration Manager (SCCM)/Intune
 Goal: Manage endpoints for software deployment, updates, and compliance.
 Overview: SCCM manages on-premises devices for software deployment, imaging, and patching. Intune provides cloud-based Mobile Device Management (MDM) for mobile and modern devices, ensuring compliance and security.
-What to Know
 
-SCCM: Application deployment, Operating System (OS) imaging, patch management, inventory reporting.
-Task: Deploy software and updates to on-premises devices.
-Importance: Ensures consistent, secure endpoint management.
+### What to Know
 
+**SCCM**: Application deployment, Operating System (OS) imaging, patch management, inventory reporting.  
+**Task**: Deploy software and updates to on-premises devices.  
+**Importance**: Ensures consistent, secure endpoint management.
 
-Intune: MDM, compliance policies, app protection policies.
-Task: Manage mobile and cloud-connected devices.
-Importance: Supports modern, remote work environments.
+**Intune**: MDM, compliance policies, app protection policies.  
+**Task**: Manage mobile and cloud-connected devices.  
+**Importance**: Supports modern, remote work environments.
 
+**Packaging**: Microsoft Installer (MSI, software packaging), Application Virtualization (App-V, isolated apps).  
+**Task**: Package applications for deployment.  
+**Importance**: Ensures reliable software installation.
 
-Packaging: Microsoft Installer (MSI, software packaging), Application Virtualization (App-V, isolated apps).
-Task: Package applications for deployment.
-Importance: Ensures reliable software installation.
+**Compliance**: Device health checks, security baselines.  
+**Task**: Enforce security policies on devices.  
+**Importance**: Protects against non-compliant devices.
 
+**Reporting**: Client health, deployment status reports.  
+**Task**: Monitor endpoint health and deployment success.  
+**Importance**: Identifies issues for proactive resolution.
 
-Compliance: Device health checks, security baselines.
-Task: Enforce security policies on devices.
-Importance: Protects against non-compliant devices.
+### Comparison Table
 
+| Tool   | Purpose                     | Pros                         | Cons                    |
+|--------|-----------------------------|------------------------------|-------------------------|
+| SCCM   | On-premises endpoint management | Detailed control, robust     | Complex setup           |
+| Intune | Cloud-based MDM             | Mobile support, Azure integration | Limited for legacy systems |
+| MSI    | Software packaging          | Standard format              | Limited flexibility     |
+| App-V  | Application virtualization  | Isolation, portability       | Requires setup expertise |
 
-Reporting: Client health, deployment status reports.
-Task: Monitor endpoint health and deployment success.
-Importance: Identifies issues for proactive resolution.
+### Practice
 
+**Deploy App via SCCM**:  
+**Why**: Automates software distribution across devices.  
+**How**: Create application in SCCM console, deploy to device collection.  
+**Explanation**: Ensures consistent software delivery to endpoints.
 
+**Set Intune Compliance Policy**:  
+**Why**: Enforces device security requirements.  
+**How**: Configure encryption policy in Intune portal.  
+**Explanation**: Restricts access for non-compliant devices, enhancing security.
 
-Comparison Table
+**Patch Management with SCCM**:  
+**Why**: Keeps systems secure with updates.  
+**How**: Deploy update group with maintenance window in SCCM.  
+**Explanation**: Minimizes disruption while applying patches.
 
+**Monitor Client Health**:  
+**Why**: Ensures endpoint compliance and functionality.  
+**How**: Use SCCM Client Status report in the console.  
+**Explanation**: Identifies unhealthy clients for remediation.
 
+### Sample Questions
 
-Tool
-Purpose
-Pros
-Cons
+**Q: How do you troubleshoot SCCM deployment failures?**  
+**A**: Check logs (`C:\Windows\CCM\Logs`), verify network connectivity, review deployment status.  
+**Why**: Pinpoints failure causes (e.g., network or configuration issues).
 
+**Q: How does Intune enhance endpoint management?**  
+**A**: Provides cloud-based MDM, supports mobile devices, integrates with Azure AD.  
+**Why**: Enables modern, flexible device management.
 
+---
 
-SCCM
-On-premises endpoint management
-Detailed control, robust
-Complex setup
+✅ Chapter 13: VMware ESXi Virtualization  
+**Goal**: Manage virtualized environments using VMware ESXi and vSphere for efficient resource utilization.  
+**Overview**: ESXi is a type-1 hypervisor for running virtual machines (VMs). vSphere manages clusters, Distributed Resource Scheduler (DRS) for load balancing, and High Availability (HA) for failover, ensuring robust virtualization.
 
+### What to Know
 
-Intune
-Cloud-based MDM
-Mobile support, Azure integration
-Limited for legacy systems
+**ESXi**: VM creation, snapshots, resource allocation (CPU, memory).  
+**Task**: Provision and manage VMs.  
+**Importance**: Enables efficient use of hardware resources.
 
+**vSphere**: Cluster management, DRS (dynamic resource allocation), HA (automatic failover).  
+**Task**: Manage large-scale virtual environments.  
+**Importance**: Ensures high availability and resource optimization.
 
-MSI
-Software packaging
-Standard format
-Limited flexibility
+**PowerCLI**: PowerShell-based automation for VMware tasks.  
+**Task**: Automate VM and host management.  
+**Importance**: Reduces manual effort in large environments.
 
+**Networking**: Virtual Switches (vSwitches, network connectivity), port groups (VLAN-like segmentation).  
+**Task**: Configure VM networking.  
+**Importance**: Ensures secure and efficient communication.
 
-App-V
-Application virtualization
-Isolation, portability
-Requires setup expertise
+**Storage**: Datastores, Virtual Machine File System (VMFS, VM storage), Network File System (NFS, shared storage).  
+**Task**: Manage storage for VMs.  
+**Importance**: Provides reliable data storage for virtualized apps.
 
+### Comparison Table
 
-Practice
+| Tool     | Purpose               | Pros                   | Cons                       |
+|----------|-----------------------|------------------------|----------------------------|
+| ESXi     | Hypervisor            | Lightweight, high performance | Licensed, costly     |
+| vSphere  | Cluster management    | Scalable, feature-rich | Complex setup              |
+| PowerCLI | Automation            | Scriptable, flexible   | Requires PowerShell expertise |
+| VMFS     | Storage filesystem    | Optimized for VMs      | Limited cross-platform support |
 
-Deploy App via SCCM:
-Why: Automates software distribution across devices.
-How: Create application in SCCM console, deploy to device collection.
-Explanation: Ensures consistent software delivery to endpoints.
+### Practice
 
-
-Set Intune Compliance Policy:
-Why: Enforces device security requirements.
-How: Configure encryption policy in Intune portal.
-Explanation: Restricts access for non-compliant devices, enhancing security.
-
-
-Patch Management with SCCM:
-Why: Keeps systems secure with updates.
-How: Deploy update group with maintenance window in SCCM.
-Explanation: Minimizes disruption while applying patches.
-
-
-Monitor Client Health:
-Why: Ensures endpoint compliance and functionality.
-How: Use SCCM Client Status report in the console.
-Explanation: Identifies unhealthy clients for remediation.
-
-
-
-Sample Questions
-
-Q: How do you troubleshoot SCCM deployment failures?
-A: Check logs (C:\Windows\CCM\Logs), verify network connectivity, review deployment status.
-Why: Pinpoints failure causes (e.g., network or configuration issues).
-
-
-Q: How does Intune enhance endpoint management?
-A: Provides cloud-based MDM, supports mobile devices, integrates with Azure AD.
-Why: Enables modern, flexible device management.
-
-
-
-
-✅ Chapter 13: VMware ESXi Virtualization
-Goal: Manage virtualized environments using VMware ESXi and vSphere for efficient resource utilization.
-Overview: ESXi is a type-1 hypervisor for running virtual machines (VMs). vSphere manages clusters, Distributed Resource Scheduler (DRS) for load balancing, and High Availability (HA) for failover, ensuring robust virtualization.
-What to Know
-
-ESXi: VM creation, snapshots, resource allocation (CPU, memory).
-Task: Provision and manage VMs.
-Importance: Enables efficient use of hardware resources.
-
-
-vSphere: Cluster management, DRS (dynamic resource allocation), HA (automatic failover).
-Task: Manage large-scale virtual environments.
-Importance: Ensures high availability and resource optimization.
-
-
-PowerCLI: PowerShell-based automation for VMware tasks.
-Task: Automate VM and host management.
-Importance: Reduces manual effort in large environments.
-
-
-Networking: Virtual Switches (vSwitches, network connectivity), port groups (VLAN-like segmentation).
-Task: Configure VM networking.
-Importance: Ensures secure and efficient communication.
-
-
-Storage: Datastores, Virtual Machine File System (VMFS, VM storage), Network File System (NFS, shared storage).
-Task: Manage storage for VMs.
-Importance: Provides reliable data storage for virtualized apps.
-
-
-
-Comparison Table
-
-
-
-Tool
-Purpose
-Pros
-Cons
-
-
-
-ESXi
-Hypervisor
-Lightweight, high performance
-Licensed, costly
-
-
-vSphere
-Cluster management
-Scalable, feature-rich
-Complex setup
-
-
-PowerCLI
-Automation
-Scriptable, flexible
-Requires PowerShell expertise
-
-
-VMFS
-Storage filesystem
-Optimized for VMs
-Limited cross-platform support
-
-
-Practice
-
-Create VM with PowerCLI:
-Why: Automates VM provisioning for efficiency.
-How:
-
+**Create VM with PowerCLI**:  
+**Why**: Automates VM provisioning for efficiency.  
+**How**:
+```powershell
 Connect-VIServer -Server "vcenter.example.com" -User "admin" -Password "pass"
 New-VM -Name "MyVM" -Template "RHEL-Template" -VMHost "esxi-host" -Datastore "datastore1"
+```
+**Explanation**: Deploys a VM from a Red Hat Enterprise Linux template on a specified host.
 
+**Take VM Snapshot**:  
+**Why**: Enables rollback for VM recovery.  
+**How**: `New-Snapshot -VM "MyVM" -Name "Pre-Update"`  
+**Explanation**: Captures VM state before changes, allowing restoration if needed.
 
-Explanation: Deploys a VM from a Red Hat Enterprise Linux template on a specified host.
+**Configure vSwitch**:  
+**Why**: Enables VM network connectivity.  
+**How**: `New-VirtualSwitch -VMHost "esxi-host" -Name "vSwitch1"`  
+**Explanation**: Sets up a virtual switch for VM communication.
 
+**Monitor ESXi Host**:  
+**Why**: Ensures resource availability for VMs.  
+**How**: 
+```powershell
+Get-VMHost -Name "esxi-host" | Select-Object Name, CpuUsageMhz
+```
+**Explanation**: Displays host CPU usage for performance monitoring.
 
-Take VM Snapshot:
-Why: Enables rollback for VM recovery.
-How: New-Snapshot -VM "MyVM" -Name "Pre-Update".
-Explanation: Captures VM state before changes, allowing restoration if needed.
+### Sample Questions
 
+**Q: How do you optimize ESXi performance?**  
+**A**: Use DRS for load balancing, set resource limits, monitor with PowerCLI.  
+**Why**: Prevents resource contention and improves efficiency.
 
-Configure vSwitch:
-Why: Enables VM network connectivity.
-How: New-VirtualSwitch -VMHost "esxi-host" -Name "vSwitch1".
-Explanation: Sets up a virtual switch for VM communication.
+**Q: How do you handle VM migration?**  
+**A**: Use vMotion (`Move-VM`), verify resource availability on target host.  
+**Why**: Ensures zero-downtime migration for maintenance.
 
-
-Monitor ESXi Host:
-Why: Ensures resource availability for VMs.
-How: Get-VMHost -Name "esxi-host" | Select-Object Name, CpuUsageMhz.
-Explanation: Displays host CPU usage for performance monitoring.
-
-
-
-Sample Questions
-
-Q: How do you optimize ESXi performance?
-A: Use DRS for load balancing, set resource limits, monitor with PowerCLI.
-Why: Prevents resource contention and improves efficiency.
-
-
-Q: How do you handle VM migration?
-A: Use vMotion (Move-VM), verify resource availability on target host.
-Why: Ensures zero-downtime migration for maintenance.
-
-
+---
 
 
 ✅ Chapter 14: Splunk/Elastic Stack (ELK) for Log Management
@@ -1919,7 +1847,7 @@ Q: Why use BGP over OSPF?
 A: BGP for inter-domain routing (e.g., internet); OSPF for intra-domain, faster convergence.
 Why: Matches protocol to network scale and requirements.
 
-
+---
 
 
 ✅ Chapter 16: Closed-Circuit Television (CCTV) Cameras & Video Management Systems (VMS)
