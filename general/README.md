@@ -453,80 +453,53 @@ A: Use `systemctl status`, `journalctl -u service -b`, verify limits, trace with
 
 ---
 
-
-
 ✅ Chapter 4: Git, GitLab Continuous Integration/Continuous Deployment (CI/CD) & Automation Pipelines
 Goal: Automate infrastructure deployments using Git and GitLab CI/CD.
 Overview: Git provides version control for tracking changes, while GitLab CI/CD automates building, testing, and deploying infrastructure. Pipelines ensure consistent, repeatable deployments, critical for enterprise environments.
+
 What to Know
 
-Git: Branches (parallel development), tags (release markers), commits (change tracking), rebasing (clean history), cherry-picking (selective commits).
-Task: Manage code versions and collaborate on changes.
-Importance: Enables team collaboration and tracks infrastructure configurations.
+### Git:
+Branches (parallel development), tags (release markers), commits (change tracking), rebasing (clean history), cherry-picking (selective commits).  
+**Task:** Manage code versions and collaborate on changes.  
+**Importance:** Enables team collaboration and tracks infrastructure configurations.
 
+### GitLab CI/CD:
+.gitlab-ci.yml (pipeline configuration), runners (execution agents), variables (store secrets/configs).  
+**Task:** Define and execute CI/CD pipelines.  
+**Importance:** Automates deployment workflows, reducing errors.
 
-GitLab CI/CD: .gitlab-ci.yml (pipeline configuration), runners (execution agents), variables (store secrets/configs).
-Task: Define and execute CI/CD pipelines.
-Importance: Automates deployment workflows, reducing errors.
+### Stages:
+Build (compile code), test (validate functionality), deploy (roll out to production), rollback (revert failures).  
+**Task:** Structure pipeline workflows.  
+**Importance:** Ensures systematic delivery and recovery.
 
+### Artifacts:
+Store build outputs (e.g., Docker images).  
+**Task:** Save and reuse pipeline outputs.  
+**Importance:** Enables rollback and deployment consistency.
 
-Stages: Build (compile code), test (validate functionality), deploy (roll out to production), rollback (revert failures).
-Task: Structure pipeline workflows.
-Importance: Ensures systematic delivery and recovery.
-
-
-Artifacts: Store build outputs (e.g., Docker images).
-Task: Save and reuse pipeline outputs.
-Importance: Enables rollback and deployment consistency.
-
-
-Triggers: Manual (user-initiated), scheduled (recurring), webhooks (external events).
-Task: Control pipeline execution.
-Importance: Provides flexibility for automation.
-
-
+### Triggers:
+Manual (user-initiated), scheduled (recurring), webhooks (external events).  
+**Task:** Control pipeline execution.  
+**Importance:** Provides flexibility for automation.
 
 Comparison Table
 
-
-
-Tool
-Purpose
-Pros
-Cons
-
-
-
-Git
-Version control
-Distributed, flexible
-Steep learning curve for advanced features
-
-
-GitLab CI/CD
-Pipeline automation
-Integrated with Git, scalable
-Requires runner setup
-
-
-Jenkins
-Alternative CI/CD
-Highly customizable
-Complex setup vs. GitLab
-
-
-GitHub Actions
-Alternative CI/CD
-Simple for GitHub repos
-Less enterprise-focused
-
+| Tool           | Purpose              | Pros                            | Cons                                |
+|----------------|----------------------|----------------------------------|-------------------------------------|
+| Git            | Version control       | Distributed, flexible            | Steep learning curve for advanced features |
+| GitLab CI/CD   | Pipeline automation   | Integrated with Git, scalable    | Requires runner setup               |
+| Jenkins        | Alternative CI/CD     | Highly customizable              | Complex setup vs. GitLab            |
+| GitHub Actions | Alternative CI/CD     | Simple for GitHub repos          | Less enterprise-focused             |
 
 Practice
 
-Deploy FastAPI with GitLab CI/CD:
-Why: Automates application deployment, ensuring consistency.
-How: Create .gitlab-ci.yml:
+### Deploy FastAPI with GitLab CI/CD:
+**Why:** Automates application deployment, ensuring consistency.  
+**How:** Create `.gitlab-ci.yml`:
 
+```yaml
 stages:
   - build
   - deploy
@@ -543,71 +516,62 @@ deploy:
   stage: deploy
   script:
     - ssh user@server "docker pull myapp:$CI_COMMIT_SHA && docker run -d -p 8000:8000 myapp:$CI_COMMIT_SHA"
+```
 
+**Steps:** Push to GitLab, monitor pipeline in GitLab UI, verify deployment.  
+**Explanation:** Builds a Docker image, stores it as an artifact, and deploys to a server via SSH.
 
-Steps: Push to GitLab, monitor pipeline in GitLab UI, verify deployment.
-Explanation: Builds a Docker image, stores it as an artifact, and deploys to a server via SSH.
+### Auto-Restart with Systemd:
+**Why:** Ensures application continuity post-deployment.  
+**How:** Update `.service` file in CI script, trigger restart (`systemctl restart fastapi`).  
+**Explanation:** Maintains service uptime after deployment.
 
+### Branch-Based Workflow:
+**Why:** Supports parallel development and testing.  
+**How:** `git branch feature-x`, push (`git push origin feature-x`), create merge request in GitLab.  
+**Explanation:** Isolates changes for review, preventing conflicts in production.
 
-Auto-Restart with Systemd:
-Why: Ensures application continuity post-deployment.
-How: Update .service file in CI script, trigger restart (systemctl restart fastapi).
-Explanation: Maintains service uptime after deployment.
+### Tag Releases:
+**Why:** Marks stable versions for deployment.  
+**How:** `git tag v1.0`, `git push origin v1.0`.  
+**Explanation:** Triggers release-specific pipelines for versioning.
 
+### Scheduled Pipeline for Backups:
+**Why:** Automates recurring tasks like backups.  
+**How:** Add to `.gitlab-ci.yml`:
 
-Branch-Based Workflow:
-Why: Supports parallel development and testing.
-How: git branch feature-x, push (git push origin feature-x), create merge request in GitLab.
-Explanation: Isolates changes for review, preventing conflicts in production.
-
-
-Tag Releases:
-Why: Marks stable versions for deployment.
-How: git tag v1.0, git push origin v1.0.
-Explanation: Triggers release-specific pipelines for versioning.
-
-
-Scheduled Pipeline for Backups:
-Why: Automates recurring tasks like backups.
-How: Add to .gitlab-ci.yml:
-
+```yaml
 backup:
   stage: deploy
   script:
     - ssh user@server "mysqldump -u root -p'password' mydb > /backup/mydb_$(date +\%F).sql"
   only:
     - schedules
+```
 
+**Steps:** Configure schedule in GitLab UI (e.g., nightly).  
+**Explanation:** Automates daily database backups, saving with timestamps.
 
-Steps: Configure schedule in GitLab UI (e.g., nightly).
-Explanation: Automates daily database backups, saving with timestamps.
-
-
-Rollback with GitLab:
-Why: Reverts failed deployments to restore stability.
-How: Store previous image tag in artifacts, redeploy via docker run.
-Explanation: Ensures quick recovery to a known good state.
-
-
+### Rollback with GitLab:
+**Why:** Reverts failed deployments to restore stability.  
+**How:** Store previous image tag in artifacts, redeploy via `docker run`.  
+**Explanation:** Ensures quick recovery to a known good state.
 
 Sample Questions
 
-Q: How do you secure GitLab CI/CD secrets?
-A: Use GitLab variables, mask sensitive data in logs, integrate with HashiCorp Vault.
-Why: Prevents credential leaks during pipeline execution.
+**Q: How do you secure GitLab CI/CD secrets?**  
+A: Use GitLab variables, mask sensitive data in logs, integrate with HashiCorp Vault.  
+**Why:** Prevents credential leaks during pipeline execution.
 
+**Q: How do you optimize CI/CD pipelines?**  
+A: Cache dependencies, parallelize jobs, use lightweight runners.  
+**Why:** Reduces pipeline runtime and resource usage.
 
-Q: How do you optimize CI/CD pipelines?
-A: Cache dependencies, parallelize jobs, use lightweight runners.
-Why: Reduces pipeline runtime and resource usage.
+**Q: How do you handle a failed pipeline?**  
+A: Check pipeline logs in GitLab, verify scripts, rerun failed jobs, or rollback.  
+**Why:** Ensures rapid issue resolution and system stability.
 
-
-Q: How do you handle a failed pipeline?
-A: Check pipeline logs in GitLab, verify scripts, rerun failed jobs, or rollback.
-Why: Ensures rapid issue resolution and system stability.
-
-
-
+---
 
 ✅ Chapter 5: Docker & Containerization
 Goal: Package and deploy applications using Docker for consistency and portability.
