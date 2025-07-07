@@ -1116,458 +1116,348 @@ async def verify_token(token: str = Depends(oauth2_scheme)):
 
 ---
 
-✅ Chapter 8: MariaDB, Structured Query Language (SQL) & NoSQL
-Goal: Manage relational and non-relational databases for application data storage.
-Overview: MariaDB, a relational database management system (RDBMS), handles structured data with SQL. NoSQL databases like MongoDB (document-based) and Redis (key-value) support unstructured or high-performance needs. Integration with APIs and robust backups ensure data reliability.
-What to Know
 
-SQL: Queries (SELECT, INSERT, UPDATE, DELETE), joins (INNER, LEFT, RIGHT), indexes (speed up queries).
-Task: Manage and query structured data.
-Importance: Ensures efficient data retrieval and manipulation for applications.
+## ✅ Chapter 8: MariaDB, Structured Query Language (SQL) & NoSQL
 
+**Goal**: Manage relational and non-relational databases for application data storage.
 
-Backups: mysqldump (full database backups), incremental backups for efficiency.
-Task: Protect data against loss.
-Importance: Critical for disaster recovery and compliance.
+**Overview**: MariaDB, a relational database management system (RDBMS), handles structured data with SQL. NoSQL databases like MongoDB (document-based) and Redis (key-value) support unstructured or high-performance needs. Integration with APIs and robust backups ensure data reliability.
 
+### What to Know
 
-API Integration: SQLAlchemy (Object-Relational Mapping - ORM for MariaDB), PyMongo (MongoDB client).
-Task: Connect databases to applications.
-Importance: Enables data-driven APIs and services.
+- **SQL**: Queries (SELECT, INSERT, UPDATE, DELETE), joins (INNER, LEFT, RIGHT), indexes (speed up queries).  
+  **Task**: Manage and query structured data.  
+  **Importance**: Ensures efficient data retrieval and manipulation for applications.
 
+- **Backups**: `mysqldump` (full database backups), incremental backups for efficiency.  
+  **Task**: Protect data against loss.  
+  **Importance**: Critical for disaster recovery and compliance.
 
-NoSQL: MongoDB (document storage for unstructured data), Redis (in-memory caching for performance).
-Task: Handle flexible or high-speed data needs.
-Importance: Supports modern, scalable applications.
+- **API Integration**: SQLAlchemy (Object-Relational Mapping - ORM for MariaDB), PyMongo (MongoDB client).  
+  **Task**: Connect databases to applications.  
+  **Importance**: Enables data-driven APIs and services.
 
+- **NoSQL**: MongoDB (document storage for unstructured data), Redis (in-memory caching for performance).  
+  **Task**: Handle flexible or high-speed data needs.  
+  **Importance**: Supports modern, scalable applications.
 
+### Comparison Table
 
-Comparison Table
+| Database Type | Pros                          | Cons                              |
+|---------------|-------------------------------|-----------------------------------|
+| MariaDB       | Relational, Structured, ACID  | Less scalable for unstructured data |
+| MongoDB       | Flexible, scalable            | No ACID transactions by default   |
+| Redis         | High-speed caching            | Limited data structure support    |
 
+### Practice
 
+**Cron MariaDB Backup**  
+- **Why**: Prevents data loss by automating backups.  
+- **How**: Add to `crontab -e`:
 
-Database
-Type
-Pros
-Cons
+```bash
+0 2 * * * /usr/bin/mysqldump -u root -p'password' mydb > /backup/mydb_$(date +%F).sql
+```
 
+**Explanation**: Schedules daily backups at 2 AM, saving with timestamps for versioning.
 
+**Connect FastAPI to MariaDB**  
+- **Why**: Enables data-driven APIs for dynamic applications.  
+- **How**:
 
-MariaDB
-Relational
-Structured, ACID-compliant
-Less scalable for unstructured data
-
-
-MongoDB
-Document NoSQL
-Flexible, scalable
-No ACID transactions by default
-
-
-Redis
-Key-Value NoSQL
-High-speed caching
-Limited data structure support
-
-
-Practice
-
-Cron MariaDB Backup:
-Why: Prevents data loss by automating backups.
-How: Add to crontab -e (see Chapter 2):
-
-0 2 * * * /usr/bin/mysqldump -u root -p'password' mydb > /backup/mydb_$(date +\%F).sql
-
-
-Explanation: Schedules daily backups at 2 AM, saving with timestamps for versioning.
-
-
-Connect FastAPI to MariaDB:
-Why: Enables data-driven APIs for dynamic applications.
-How:
-
+```python
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 engine = create_engine("mysql+pymysql://user:pass@localhost/db")
 Session = sessionmaker(bind=engine)
+```
 
+**Steps**: Install `pymysql`, query database in FastAPI endpoints.  
+**Explanation**: Uses SQLAlchemy’s ORM to interact with MariaDB, simplifying queries.
 
-Steps: Install pymysql, query database in FastAPI endpoints.
-Explanation: Uses SQLAlchemy’s ORM to interact with MariaDB, simplifying queries.
+**MongoDB Query**  
+- **Why**: Handles unstructured data for flexible applications.  
+- **How**:
 
-
-MongoDB Query:
-Why: Handles unstructured data for flexible applications.
-How:
-
+```python
 from pymongo import MongoClient
 client = MongoClient("mongodb://localhost:27017")
 db = client["mydb"]
 collection = db["mycollection"]
 result = collection.find_one({"key": "value"})
+```
 
+**Explanation**: Queries a MongoDB collection for a document, ideal for JSON-like data.
 
-Explanation: Queries a MongoDB collection for a document, ideal for JSON-like data.
+**Redis Caching**  
+- **Why**: Improves API performance by caching frequent queries.  
+- **How**:
 
-
-Redis Caching:
-Why: Improves API performance by caching frequent queries.
-How:
-
+```python
 import redis
 r = redis.Redis(host="localhost", port=6379)
 r.setex("key", 3600, "value")
+```
 
+**Explanation**: Caches data with a 1-hour Time-To-Live (TTL), reducing database load.
 
-Explanation: Caches data with a 1-hour Time-To-Live (TTL), reducing database load.
+### Sample Questions
 
+**Q: How do you optimize MariaDB performance?**  
+**A**: Add indexes on frequently queried columns, optimize queries, tune `my.cnf` (e.g., `innodb_buffer_pool_size`).  
+**Why**: Improves query speed and resource efficiency.
 
+**Q: When to use NoSQL over SQL?**  
+**A**: Use NoSQL (e.g., MongoDB) for unstructured data or high scalability; SQL for structured, relational data.  
+**Why**: Matches database to application requirements.
 
-Sample Questions
+---
 
-Q: How do you optimize MariaDB performance?
-A: Add indexes on frequently queried columns, optimize queries, tune my.cnf (e.g., innodb_buffer_pool_size).
-Why: Improves query speed and resource efficiency.
+## ✅ Chapter 9: Apache Airflow & MLflow
 
+**Goal**: Automate machine learning (ML) pipelines using Apache Airflow and MLflow.
 
-Q: When to use NoSQL over SQL?
-A: Use NoSQL (e.g., MongoDB) for unstructured data or high scalability; SQL for structured, relational data.
-Why: Matches database to application requirements.
+**Overview**: Airflow orchestrates complex workflows with Directed Acyclic Graphs (DAGs), ideal for scheduling ETL (Extract, Transform, Load), training, and deployment tasks. MLflow tracks ML experiments, models, and deployments, ensuring reproducibility and versioning.
 
+### What to Know
 
+- **Airflow**: DAGs (workflow definitions), operators (task types), sensors (wait for events), XCom (data sharing between tasks).  
+  **Task**: Define and schedule complex workflows.  
+  **Importance**: Automates ML pipelines, ensuring consistency.
 
+- **MLflow**: Tracking (log experiments), projects (reproducible runs), models (versioning), registry (model storage).  
+  **Task**: Manage ML experiment lifecycle.  
+  **Importance**: Tracks and versions ML models for reproducibility.
 
-✅ Chapter 9: Apache Airflow & MLflow
-Goal: Automate machine learning (ML) pipelines using Apache Airflow and MLflow.
-Overview: Airflow orchestrates complex workflows with Directed Acyclic Graphs (DAGs), ideal for scheduling ETL (Extract, Transform, Load), training, and deployment tasks. MLflow tracks ML experiments, models, and deployments, ensuring reproducibility and versioning.
-What to Know
+- **Scheduling**: Cron expressions (e.g., `0 0 * * *` for daily), retries for reliability.  
+  **Task**: Automate task execution.  
+  **Importance**: Ensures tasks run on schedule with fault tolerance.
 
-Airflow: DAGs (workflow definitions), operators (task types), sensors (wait for events), XCom (data sharing between tasks).
-Task: Define and schedule complex workflows.
-Importance: Automates ML pipelines, ensuring consistency.
+- **Deployment**: Airflow on Kubernetes, MLflow server for tracking.  
+  **Task**: Deploy scalable workflow and tracking systems.  
+  **Importance**: Supports enterprise-grade ML operations.
 
+### Comparison Table
 
-MLflow: Tracking (log experiments), projects (reproducible runs), models (versioning), registry (model storage).
-Task: Manage ML experiment lifecycle.
-Importance: Tracks and versions ML models for reproducibility.
+| Tool     | Purpose                     | Pros                       | Cons                          |
+|----------|-----------------------------|----------------------------|-------------------------------|
+| Airflow  | Workflow orchestration      | Flexible, scalable         | Complex setup                 |
+| MLflow   | ML lifecycle management     | Tracks experiments, models | Limited workflow orchestration |
+| Kubeflow | ML pipeline orchestration   | Kubernetes-native, ML-focused | Steeper learning curve    |
 
+### Practice
 
-Scheduling: Cron expressions (e.g., 0 0 * * * for daily), retries for reliability.
-Task: Automate task execution.
-Importance: Ensures tasks run on schedule with fault tolerance.
+**Register/Deploy Model with MLflow**  
+- **Why**: Tracks ML experiments and model versions.  
+- **How**:
 
-
-Deployment: Airflow on Kubernetes, MLflow server for tracking.
-Task: Deploy scalable workflow and tracking systems.
-Importance: Supports enterprise-grade ML operations.
-
-
-
-Comparison Table
-
-
-
-Tool
-Purpose
-Pros
-Cons
-
-
-
-Airflow
-Workflow orchestration
-Flexible, scalable
-Complex setup
-
-
-MLflow
-ML lifecycle management
-Tracks experiments, models
-Limited workflow orchestration
-
-
-Kubeflow
-ML pipeline orchestration
-Kubernetes-native, ML-focused
-Steeper learning curve
-
-
-Practice
-
-Register/Deploy Model with MLflow:
-Why: Tracks ML experiments and model versions.
-How:
-
+```python
 import mlflow
 mlflow.set_tracking_uri("http://mlflow.example.com")
 mlflow.log_param("param", value)
 mlflow.log_model(model, "model")
+```
 
+**Steps**: Run in MLflow project, register model in registry.  
+**Explanation**: Logs parameters and model artifacts, enabling versioning and deployment.
 
-Steps: Run in MLflow project, register model in registry.
-Explanation: Logs parameters and model artifacts, enabling versioning and deployment.
+**Airflow DAG: ETL → Train → Deploy**  
+- **Why**: Automates end-to-end ML pipelines.  
+- **How**:
 
-
-Airflow DAG: ETL → Train → Deploy:
-Why: Automates end-to-end ML pipelines.
-How:
-
+```python
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from datetime import datetime
+
 dag = DAG("ml_pipeline", start_date=datetime(2025, 1, 1), schedule_interval="@daily")
+
 def etl(): pass
 def train(): pass
 def deploy(): pass
+
 PythonOperator(dag=dag, task_id="etl", python_callable=etl)
+```
 
+**Explanation**: Defines a pipeline with ETL, training, and deployment tasks, scheduled daily.
 
-Explanation: Defines a pipeline with ETL, training, and deployment tasks, scheduled daily.
+**Airflow Sensor**  
+- **Why**: Waits for external events (e.g., file arrival) before proceeding.  
+- **How**: Use FileSensor to wait for a data file.  
+**Explanation**: Pauses the DAG until the specified condition is met, ensuring data availability.
 
+**Deploy MLflow Server**  
+- **Why**: Centralizes experiment and model tracking.  
+- **How**:  
+```bash
+mlflow server --host 0.0.0.0
+```
 
-Airflow Sensor:
-Why: Waits for external events (e.g., file arrival) before proceeding.
-How: Use FileSensor to wait for a data file.
-Explanation: Pauses the DAG until the specified condition is met, ensuring data availability.
+**Explanation**: Runs a tracking server for MLflow, accessible to teams.
 
+### Sample Questions
 
-Deploy MLflow Server:
-Why: Centralizes experiment and model tracking.
-How: mlflow server --host 0.0.0.0.
-Explanation: Runs a tracking server for MLflow, accessible to teams.
+**Q: How do you debug a failing Airflow DAG?**  
+**A**: Check logs (`airflow logs`), verify task dependencies, test operators individually.  
+**Why**: Isolates and resolves task failures.
 
+**Q: Why use MLflow for model management?**  
+**A**: Tracks experiments, versions models, supports deployment across platforms.  
+**Why**: Simplifies ML lifecycle management.
 
-
-Sample Questions
-
-Q: How do you debug a failing Airflow DAG?
-A: Check logs (airflow logs), verify task dependencies, test operators individually.
-Why: Isolates and resolves task failures.
-
-
-Q: Why use MLflow for model management?
-A: Tracks experiments, versions models, supports deployment across platforms.
-Why: Simplifies ML lifecycle management.
-
-
-
-
-✅ Chapter 10: Amazon Web Services (AWS) & Graphics Processing Unit (GPU) Server Management
-Goal: Manage cloud-based and GPU-powered servers for scalable, high-performance infrastructure.
-Overview: AWS provides cloud services like Elastic Compute Cloud (EC2) for virtual servers, Simple Storage Service (S3) for storage, and Identity and Access Management (IAM) for security. GPU servers, using tools like nvidia-smi, support compute-intensive tasks like ML training.
-What to Know
-
-AWS: EC2 (virtual servers), S3 (object storage), IAM (access control), Virtual Private Cloud (VPC, network isolation), CloudWatch (monitoring).
-Task: Deploy and manage cloud infrastructure.
-Importance: Enables scalable, cost-effective computing.
-
-
-GPU: nvidia-smi (GPU monitoring), Compute Unified Device Architecture (CUDA, GPU programming), cuDNN (deep learning library).
-Task: Monitor and optimize GPU workloads.
-Importance: Critical for ML and high-performance computing.
-
-
-SSH/Secure Copy Protocol (SCP): Secure access and file transfer.
-Task: Manage remote servers securely.
-Importance: Ensures secure administration of cloud servers.
-
-
-Firewalls: Security groups (instance-level), Network Access Control Lists (NACLs, subnet-level).
-Task: Control network access.
-Importance: Protects infrastructure from unauthorized access.
+---
 
 
 
-Comparison Table
+# ✅ Chapter 10: Amazon Web Services (AWS) & Graphics Processing Unit (GPU) Server Management
 
+**Goal:** Manage cloud-based and GPU-powered servers for scalable, high-performance infrastructure.  
+**Overview:** AWS provides cloud services like Elastic Compute Cloud (EC2) for virtual servers, Simple Storage Service (S3) for storage, and Identity and Access Management (IAM) for security. GPU servers, using tools like `nvidia-smi`, support compute-intensive tasks like ML training.
 
+## What to Know
 
-Tool
-Purpose
-Pros
-Cons
+### AWS:
+- **EC2** (virtual servers), **S3** (object storage), **IAM** (access control), **VPC** (network isolation), **CloudWatch** (monitoring)
+- **Task:** Deploy and manage cloud infrastructure
+- **Importance:** Enables scalable, cost-effective computing
 
+### GPU:
+- `nvidia-smi` (GPU monitoring), CUDA (GPU programming), cuDNN (deep learning library)
+- **Task:** Monitor and optimize GPU workloads
+- **Importance:** Critical for ML and high-performance computing
 
+### SSH/SCP:
+- Secure access and file transfer
+- **Task:** Manage remote servers securely
+- **Importance:** Ensures secure administration of cloud servers
 
-EC2
-Virtual servers
-Scalable, flexible
-Costly if mismanaged
+### Firewalls:
+- Security groups (instance-level), NACLs (subnet-level)
+- **Task:** Control network access
+- **Importance:** Protects infrastructure from unauthorized access
 
+## Comparison Table
 
-S3
-Object storage
-Durable, scalable
-Complex pricing model
+| Tool        | Purpose              | Pros                  | Cons                            |
+|-------------|----------------------|------------------------|----------------------------------|
+| EC2         | Virtual servers       | Scalable, flexible     | Costly if mismanaged            |
+| S3          | Object storage        | Durable, scalable      | Complex pricing model           |
+| IAM         | Access control        | Granular, secure       | Setup complexity                |
+| nvidia-smi  | GPU monitoring        | Real-time metrics      | Limited to Nvidia GPUs          |
 
+## Practice
 
-IAM
-Access control
-Granular, secure
-Setup complexity
+### Deploy FastAPI on EC2:
+- **Why:** Scales APIs in the cloud for accessibility
+- **How:** Launch EC2 instance, install FastAPI, configure systemd service
+- **Explanation:** Runs the application in AWS with reliable service management
 
-
-nvidia-smi
-GPU monitoring
-Real-time metrics
-Limited to Nvidia GPUs
-
-
-Practice
-
-Deploy FastAPI on EC2:
-Why: Scales APIs in the cloud for accessibility.
-How: Launch EC2 instance, install FastAPI, configure systemd service.
-Explanation: Runs the application in AWS with reliable service management.
-
-
-Script GPU Usage Logging:
-Why: Monitors GPU health for performance optimization.
-How:
-
+### Script GPU Usage Logging:
+```bash
 nvidia-smi --query-gpu=utilization.gpu --format=csv >> /var/log/gpu.log
+```
+- **Explanation:** Logs GPU utilization to a file for analysis
 
+### Configure IAM Role:
+- **Why:** Secures access to AWS resources
+- **How:** Attach an S3 access role to EC2 via AWS console
+- **Explanation:** Grants least privilege access, reducing security risks
 
-Explanation: Logs GPU utilization to a file for analysis.
+### Set Up VPC Firewall:
+- **Why:** Restricts unauthorized network access
+- **How:** Configure security group to allow port 8000 traffic
+- **Explanation:** Limits traffic to the application port, enhancing security
 
+## Sample Questions
 
-Configure IAM Role:
-Why: Secures access to AWS resources.
-How: Attach an S3 access role to EC2 via AWS console.
-Explanation: Grants least privilege access, reducing security risks.
+**Q:** How do you optimize GPU usage on EC2?  
+**A:** Monitor with `nvidia-smi`, distribute workloads, select GPU-optimized instances (e.g., g4dn).  
+**Why:** Maximizes compute efficiency for ML tasks.
 
+**Q:** How do you secure an EC2 instance?  
+**A:** Use IAM roles, configure security groups, disable password-based SSH, patch regularly.  
+**Why:** Reduces attack surface and vulnerabilities.
 
-Set Up VPC Firewall:
-Why: Restricts unauthorized network access.
-How: Configure security group to allow port 8000 traffic.
-Explanation: Limits traffic to the application port, enhancing security.
+---
 
+# ✅ Chapter 11: Windows Server 2022 Administration
 
+**Goal:** Manage Windows Server environments for enterprise applications and services.  
+**Overview:** Windows Server 2022 supports Active Directory (AD) for user management, file sharing, and virtualization. PowerShell automates tasks, and Event Viewer provides log analysis for troubleshooting.
 
-Sample Questions
+## What to Know
 
-Q: How do you optimize GPU usage on EC2?
-A: Monitor with nvidia-smi, distribute workloads, select GPU-optimized instances (e.g., g4dn).
-Why: Maximizes compute efficiency for ML tasks.
+### Active Directory (AD):
+- Users, groups, Group Policy Objects (GPOs)
+- **Task:** Manage user accounts and policies
+- **Importance:** Ensures secure, centralized authentication and authorization
 
+### PowerShell:
+- Scripting and automation (e.g., ActiveDirectory module)
+- **Task:** Automate server administration tasks
+- **Importance:** Reduces manual effort, improves efficiency
 
-Q: How do you secure an EC2 instance?
-A: Use IAM roles, configure security groups, disable password-based SSH, patch regularly.
-Why: Reduces attack surface and vulnerabilities.
+### Services:
+- Manage dependencies, configure recovery options
+- **Task:** Ensure service reliability
+- **Importance:** Prevents downtime for critical services
 
+### Event Viewer:
+- Analyze system and application logs
+- **Task:** Troubleshoot issues via log analysis
+- **Importance:** Identifies root causes of server issues
 
+### File Sharing:
+- SMB (file sharing protocol), NTFS (permissions), DFS (distributed storage)
+- **Task:** Share and secure files across networks
+- **Importance:** Enables collaboration and data access
 
+## Comparison Table
 
-✅ Chapter 11: Windows Server 2022 Administration
-Goal: Manage Windows Server environments for enterprise applications and services.
-Overview: Windows Server 2022 supports Active Directory (AD) for user management, file sharing, and virtualization. PowerShell automates tasks, and Event Viewer provides log analysis for troubleshooting.
-What to Know
+| Tool           | Purpose               | Pros                   | Cons                            |
+|----------------|------------------------|--------------------------|----------------------------------|
+| Active Directory | User/Group management | Centralized, scalable    | Complex setup                    |
+| PowerShell     | Automation            | Powerful, integrated     | Steep learning curve             |
+| SMB            | File sharing          | Easy setup, secure       | Limited cross-platform support   |
+| Event Viewer   | Log analysis          | Detailed logs            | Can be overwhelming              |
 
-Active Directory (AD): Users, groups, Group Policy Objects (GPOs) for centralized access control.
-Task: Manage user accounts and policies.
-Importance: Ensures secure, centralized authentication and authorization.
+## Practice
 
+### Create AD User:
+```powershell
+New-ADUser -Name "User" -Path "OU=Users,DC=example,DC=com"
+```
+- **Explanation:** Creates a user in the specified OU for domain access
 
-PowerShell: Scripting and automation (e.g., ActiveDirectory module).
-Task: Automate server administration tasks.
-Importance: Reduces manual effort, improves efficiency.
-
-
-Services: Manage dependencies, configure recovery options.
-Task: Ensure service reliability.
-Importance: Prevents downtime for critical services.
-
-
-Event Viewer: Analyze system and application logs.
-Task: Troubleshoot issues via log analysis.
-Importance: Identifies root causes of server issues.
-
-
-File Sharing: Server Message Block (SMB, file sharing protocol), New Technology File System (NTFS, permissions), Distributed File System (DFS, distributed storage).
-Task: Share and secure files across networks.
-Importance: Enables collaboration and data access.
-
-
-
-Comparison Table
-
-
-
-Tool
-Purpose
-Pros
-Cons
-
-
-
-Active Directory
-User/Group management
-Centralized, scalable
-Complex setup
-
-
-PowerShell
-Automation
-Powerful, integrated
-Steep learning curve
-
-
-SMB
-File sharing
-Easy setup, secure
-Limited cross-platform support
-
-
-Event Viewer
-Log analysis
-Detailed logs
-Can be overwhelming
-
-
-Practice
-
-Create AD User:
-Why: Manages access to network resources.
-How: New-ADUser -Name "User" -Path "OU=Users,DC=example,DC=com".
-Explanation: Creates a user in the specified Organizational Unit (OU) for domain access.
-
-
-PowerShell Script for Disk Usage:
-Why: Monitors server health to prevent resource issues.
-How:
-
+### PowerShell Script for Disk Usage:
+```powershell
 Get-Disk | Select-Object Number, @{Name="FreeSpaceGB";Expression={[math]::Round($_.FreeSpace/1GB,2)}}
+```
+- **Explanation:** Reports disk usage in gigabytes, aiding capacity planning
 
+### Configure File Share:
+```powershell
+New-SmbShare -Name "DataShare" -Path "C:\Data"
+```
+- **Explanation:** Creates an SMB share for domain users to access files
 
-Explanation: Reports disk usage in gigabytes, aiding capacity planning.
+### Backup AD:
+```cmd
+ntdsutil snapshot "create" quit quit
+```
+- **Explanation:** Creates a snapshot of AD for restoration
 
+## Sample Questions
 
-Configure File Share:
-Why: Enables secure resource sharing.
-How: New-SmbShare -Name "DataShare" -Path "C:\Data".
-Explanation: Creates an SMB share for domain users to access files.
+**Q:** How do you troubleshoot a Windows service?  
+**A:** Check Event Viewer, verify service dependencies, test recovery options.  
+**Why:** Identifies and resolves service issues quickly.
 
+**Q:** How do you secure AD?  
+**A:** Use strong GPOs, enable auditing, restrict admin accounts with least privilege.  
+**Why:** Prevents unauthorized access and enhances security.
 
-Backup AD:
-Why: Ensures domain recovery in case of failure.
-How: ntdsutil snapshot "create" quit quit.
-Explanation: Creates a snapshot of AD for restoration.
-
-
-
-Sample Questions
-
-Q: How do you troubleshoot a Windows service?
-A: Check Event Viewer, verify service dependencies, test recovery options.
-Why: Identifies and resolves service issues quickly.
-
-
-Q: How do you secure AD?
-A: Use strong GPOs, enable auditing, restrict admin accounts with least privilege.
-Why: Prevents unauthorized access and enhances security.
-
-
+---
 
 
 ✅ Chapter 12: Microsoft System Center Configuration Manager (SCCM)/Intune
