@@ -1,5 +1,5 @@
-🛠️ Infrastructure Engineer Interview Preparation Guide
-Target Role: Infrastructure Engineer (Linux, Red Hat OpenShift, Windows Server, Automation, Networking, Security)
+# 🛠️ Infrastructure Engineer Interview Preparation Guide
+### Target Role: Infrastructure Engineer (Linux, Red Hat OpenShift, Windows Server, Automation, Networking, Security)
 This guide prepares candidates for infrastructure engineering interviews, focusing on practical, hands-on skills in Linux (Red Hat Enterprise Linux - RHEL), Windows Server, Red Hat OpenShift, automation (Ansible, Python, Bash, PowerShell), virtualization (VMware ESXi), endpoint management (Microsoft System Center Configuration Manager - SCCM/Microsoft Intune), log analysis (Splunk/Elastic Stack - ELK), networking (Cisco), Closed-Circuit Television (CCTV)/Video Management Systems (VMS), Information Technology Infrastructure Library (ITIL)/Agile methodologies, and decision-making. The focus is on operational readiness, ensuring robust, maintainable, and secure systems before pursuing innovation.
 
 📌 Purpose
