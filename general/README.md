@@ -138,103 +138,103 @@ Why: Restores system functionality, preventing service disruptions.
 
 
 
-✅ Chapter 2: Shell Scripting & Automation
-Goal: Automate repetitive infrastructure tasks using Bash and Python.
-Overview: Shell scripting (Bash) and Python streamline infrastructure management by automating tasks like monitoring, backups, and server configuration. Bash is lightweight and native to Linux, ideal for quick scripts. Python offers advanced capabilities for complex automation, such as remote server management.
-What to Know
+## ✅ Chapter 2: Shell Scripting & Automation
 
-Bash: Conditional statements (if), loops (for, while), functions for scripting logic.
-Task: Write scripts to automate repetitive tasks (e.g., service checks).
-Importance: Reduces manual effort, ensures consistency in Linux environments.
+### 🎯 Goal
 
+Automate repetitive infrastructure tasks using Bash and Python.
 
-Parsing: awk (text processing), sed (stream editor), cut (field extraction), grep (pattern matching) for log and data analysis.
-Task: Extract and manipulate data from logs or files.
-Importance: Critical for troubleshooting and generating reports from logs.
+### 📖 Overview
 
+Shell scripting (Bash) and Python streamline infrastructure management by automating tasks like monitoring, backups, and server configuration. Bash is lightweight and native to Linux, ideal for quick scripts. Python offers advanced capabilities for complex automation, such as remote server management.
 
-Scheduling: cron (job scheduler) for automating recurring tasks.
-Task: Schedule scripts for backups or monitoring.
-Importance: Ensures tasks run consistently without manual intervention.
+---
 
+### 📌 What to Know
 
-JSON: jq (JSON processor) for parsing API responses or configuration files.
-Task: Process JSON data from APIs or tools.
-Importance: Enables automation with modern APIs and configuration files.
+#### 🔹 Bash
 
+- Conditional statements (`if`), loops (`for`, `while`), functions for scripting logic.
+- **Task**: Write scripts to automate repetitive tasks (e.g., service checks).
+- **Importance**: Reduces manual effort, ensures consistency in Linux environments.
 
-Python: subprocess (run shell commands), paramiko (SSH automation) for advanced scripting.
-Task: Automate complex tasks, including remote server operations.
-Importance: Provides flexibility for cross-platform and remote automation.
+#### 🔹 Parsing
 
+- Tools: `awk` (text processing), `sed` (stream editor), `cut` (field extraction), `grep` (pattern matching) for log and data analysis.
+- **Task**: Extract and manipulate data from logs or files.
+- **Importance**: Critical for troubleshooting and generating reports from logs.
 
+#### 🔹 Scheduling
 
-Comparison Table
+- Tool: `cron` (job scheduler) for automating recurring tasks.
+- **Task**: Schedule scripts for backups or monitoring.
+- **Importance**: Ensures tasks run consistently without manual intervention.
 
+#### 🔹 JSON
 
+- Tool: `jq` (JSON processor) for parsing API responses or configuration files.
+- **Task**: Process JSON data from APIs or tools.
+- **Importance**: Enables automation with modern APIs and configuration files.
 
-Tool
-Purpose
-Pros
-Cons
+#### 🔹 Python
 
+- Libraries: `subprocess` (run shell commands), `paramiko` (SSH automation) for advanced scripting.
+- **Task**: Automate complex tasks, including remote server operations.
+- **Importance**: Provides flexibility for cross-platform and remote automation.
 
+---
 
-Bash
-Lightweight scripting
-Native to Linux, simple syntax
-Limited for complex logic
+### 📊 Comparison Table
 
+| Tool   | Purpose               | Pros                           | Cons                               |
+| ------ | --------------------- | ------------------------------ | ---------------------------------- |
+| Bash   | Lightweight scripting | Native to Linux, simple syntax | Limited for complex logic          |
+| Python | Advanced automation   | Cross-platform, rich libraries | Requires installation              |
+| cron   | Task scheduling       | Reliable, built-in             | Limited flexibility vs timers      |
+| jq     | JSON parsing          | Fast, lightweight              | Learning curve for complex queries |
 
-Python
-Advanced automation
-Cross-platform, rich libraries
-Requires installation
+---
 
+### 🧪 Practice
 
-cron
-Task scheduling
-Reliable, built-in
-Limited flexibility vs. systemd timers
+#### ✅ Script: Service Uptime Monitoring
 
+**Why**: Ensures critical services remain active, preventing downtime.
+**How**:
 
-jq
-JSON parsing
-Fast, lightweight
-Learning curve for complex queries
-
-
-Practice
-
-Script Service Uptime Monitoring:
-Why: Ensures critical services remain active, preventing downtime.
-How:
-
+```bash
 #!/bin/bash
 SERVICE="myservice"
 if ! systemctl is-active --quiet $SERVICE; then
     echo "$(date): $SERVICE down" >> /var/log/service_monitor.log
     # Send alert (e.g., email or webhook)
 fi
+```
 
+**Explanation**: Checks if `myservice` is running using `systemctl`. Logs failures and can trigger alerts.
 
-Explanation: Checks if myservice is running using systemctl. Logs failures to /var/log/service_monitor.log and can trigger alerts (e.g., via email or Slack webhook).
+---
 
+#### ✅ Cron Job: MariaDB Backup
 
-Cron for MariaDB Backup:
-Why: Prevents data loss by automating database backups.
-How: Add to crontab -e:
+**Why**: Prevents data loss by automating database backups.
+**How**:
+Add to `crontab -e`:
 
+```bash
 0 2 * * * /usr/bin/mysqldump -u root -p'password' mydb > /backup/mydb_$(date +\%F).sql
+```
 
+**Explanation**: Schedules daily backup at 2 AM with timestamped filenames.
 
-Explanation: Schedules daily MariaDB backup at 2 AM, saving with a timestamp for versioning.
+---
 
+#### ✅ Python Script: SSH Automation
 
-Python Script for SSH Automation:
-Why: Automates tasks on remote servers, reducing manual effort.
-How:
+**Why**: Automates tasks on remote servers.
+**How**:
 
+```python
 import paramiko
 client = paramiko.SSHClient()
 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -242,28 +242,34 @@ client.connect('hostname', username='user', key_filename='~/.ssh/id_rsa')
 stdin, stdout, stderr = client.exec_command('uptime')
 print(stdout.read().decode())
 client.close()
+```
 
+**Explanation**: Uses `paramiko` to SSH into a server and run commands.
 
-Explanation: Uses paramiko to execute uptime on a remote server via SSH, securely automating remote tasks.
+---
 
+#### ✅ Log Parsing: `awk`
 
-Parse Logs with awk:
-Why: Identifies specific issues in logs for troubleshooting.
-How: awk '/ERROR/ {print $0}' /var/log/app.log
-Explanation: Filters lines containing "ERROR" from application logs, aiding in quick issue identification.
+**Why**: Identifies specific issues in logs for troubleshooting.
+**How**:
 
+```bash
+awk '/ERROR/ {print $0}' /var/log/app.log
+```
 
+**Explanation**: Filters lines with "ERROR" to help pinpoint issues.
 
-Sample Questions
+---
 
-Q: How do you automate repetitive server tasks?
-A: Use Bash for simple tasks (e.g., log parsing with grep), Python for complex automation (e.g., SSH with paramiko), and cron for scheduling.
-Why: Reduces manual effort, ensures consistent execution.
+### 🤔 Sample Questions
 
+**Q: How do you automate repetitive server tasks?**
+A: Use Bash for simple tasks (e.g., log parsing with `grep`), Python for complex automation (e.g., SSH with `paramiko`), and `cron` for scheduling.
+**Why**: Reduces manual effort and ensures consistent execution.
 
-Q: How do you debug a failing Bash script?
-A: Enable tracing with set -x, check exit codes ($?), log outputs to a file.
-Why: Pinpoints syntax or logic errors efficiently.
+**Q: How do you debug a failing Bash script?**
+A: Enable tracing with `set -x`, check exit codes (`$?`), log outputs to a file.
+**Why**: Pinpoints syntax or logic errors efficiently.
 
 
 
