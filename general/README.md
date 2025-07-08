@@ -1717,222 +1717,167 @@ A: Check Logstash pipeline configuration, verify Elasticsearch health, ensure Fi
 Why: Identifies and resolves log ingestion issues.
 
 
+---
 
 
-✅ Chapter 15: Cisco Networking Technologies
-Goal: Manage Cisco-based network infrastructure for reliable connectivity and security.
-Overview: Cisco devices power enterprise networks, providing routing, switching, and security. Configuring Virtual Local Area Networks (VLANs), routing protocols, and Access Control Lists (ACLs) ensures efficient and secure network operations.
-What to Know
+# ✅ Chapter 15: Cisco Networking Technologies
 
-VLANs: Virtual Local Area Networks segment networks for security and performance.
-Task: Isolate traffic for different departments or applications.
-Importance: Reduces broadcast traffic and enhances security.
+**Goal:** Manage Cisco-based network infrastructure for reliable connectivity and security.  
+**Overview:** Cisco devices power enterprise networks, providing routing, switching, and security. Configuring Virtual Local Area Networks (VLANs), routing protocols, and Access Control Lists (ACLs) ensures efficient and secure network operations.
 
+## What to Know
 
-Routing: Open Shortest Path First (OSPF, intra-domain routing), Border Gateway Protocol (BGP, inter-domain routing), static routes (manual routing).
-Task: Configure network routing for connectivity.
-Importance: Ensures efficient data transfer across networks.
+### VLANs
+- **Task:** Isolate traffic for different departments or applications.
+- **Importance:** Reduces broadcast traffic and enhances security.
 
+### Routing
+- **Protocols:** Open Shortest Path First (OSPF, intra-domain routing), Border Gateway Protocol (BGP, inter-domain routing), static routes (manual routing).
+- **Task:** Configure network routing for connectivity.
+- **Importance:** Ensures efficient data transfer across networks.
 
-Firewalls/ACLs: Access Control Lists restrict traffic based on rules.
-Task: Control network access for security.
-Importance: Prevents unauthorized access to resources.
+### Firewalls/ACLs
+- **Task:** Control network access for security.
+- **Importance:** Prevents unauthorized access to resources.
 
+### Monitoring
+- **Tools:** Simple Network Management Protocol (SNMP, metrics), NetFlow (traffic analysis).
+- **Task:** Monitor network performance and issues.
+- **Importance:** Identifies bottlenecks and security threats.
 
-Monitoring: Simple Network Management Protocol (SNMP, metrics), NetFlow (traffic analysis).
-Task: Monitor network performance and issues.
-Importance: Identifies bottlenecks and security threats.
+### Cisco IOS
+- **Description:** Internetwork Operating System, CLI for configuring Cisco devices.
+- **Task:** Manage switches, routers, and firewalls.
+- **Importance:** Provides granular control over network infrastructure.
 
+## Comparison Table
 
-Cisco IOS: Internetwork Operating System, CLI for configuring Cisco devices.
-Task: Manage switches, routers, and firewalls.
-Importance: Provides granular control over network infrastructure.
+| Tool/Protocol | Purpose               | Pros                          | Cons                            |
+|---------------|------------------------|-------------------------------|----------------------------------|
+| VLANs         | Network segmentation   | Enhances security, performance | Complex to manage at scale      |
+| OSPF          | Dynamic routing        | Fast convergence              | Complex configuration            |
+| BGP           | Inter-domain routing   | Scalable for large networks   | Slower convergence               |
+| SNMP          | Network monitoring     | Detailed metrics              | Security risks if misconfigured |
 
+## Practice
 
-
-Comparison Table
-
-
-
-Tool/Protocol
-Purpose
-Pros
-Cons
-
-
-
-VLANs
-Network segmentation
-Enhances security, performance
-Complex to manage at scale
-
-
-OSPF
-Dynamic routing
-Fast convergence
-Complex configuration
-
-
-BGP
-Inter-domain routing
-Scalable for large networks
-Slower convergence
-
-
-SNMP
-Network monitoring
-Detailed metrics
-Security risks if misconfigured
-
-
-Practice
-
-Configure VLAN:
-Why: Segments traffic to improve security and performance.
-How:
-
+### Configure VLAN
+**Why:** Segments traffic to improve security and performance.  
+**How:**  
+```bash
 vlan 10
  name MY_VLAN
 interface g0/1
  switchport mode access
  switchport access vlan 10
+```
+**Explanation:** Assigns port g0/1 to VLAN 10, isolating traffic for a specific department or application.
 
-
-Explanation: Assigns port g0/1 to VLAN 10, isolating traffic for a specific department or application.
-
-
-Set Up ACL:
-Why: Restricts unauthorized network access.
-How:
-
+### Set Up ACL
+**Why:** Restricts unauthorized network access.  
+**How:**  
+```bash
 access-list 101 permit tcp any host 192.168.1.1 eq 80
 interface g0/1
  ip access-group 101 in
+```
+**Explanation:** Allows HTTP traffic to 192.168.1.1, blocking other traffic on the interface.
 
-
-Explanation: Allows HTTP traffic to 192.168.1.1, blocking other traffic on the interface.
-
-
-Configure OSPF:
-Why: Enables dynamic routing for efficient network connectivity.
-How:
-
+### Configure OSPF
+**Why:** Enables dynamic routing for efficient network connectivity.  
+**How:**  
+```bash
 router ospf 1
  network 192.168.1.0 0.0.0.255 area 0
+```
+**Explanation:** Advertises the 192.168.1.0/24 network in OSPF area 0 for routing.
 
-
-Explanation: Advertises the 192.168.1.0/24 network in OSPF area 0 for routing.
-
-
-Monitor with SNMP:
-Why: Tracks network performance and issues.
-How:
-
+### Monitor with SNMP
+**Why:** Tracks network performance and issues.  
+**How:**  
+```bash
 snmp-server community public RO
 snmp-server host 192.168.1.100 public
+```
+**Explanation:** Enables read-only SNMP access, sending metrics to a monitoring server.
 
+## Sample Questions
 
-Explanation: Enables read-only SNMP access, sending metrics to a monitoring server.
+**Q:** How do you troubleshoot VLAN connectivity issues?  
+**A:** Verify `show vlan brief`, check trunking (`show interfaces trunk`), test connectivity with `ping`.  
+**Why:** Isolates misconfigurations in VLAN setup.
 
+**Q:** Why use BGP over OSPF?  
+**A:** BGP for inter-domain routing (e.g., internet); OSPF for intra-domain, faster convergence.  
+**Why:** Matches protocol to network scale and requirements.
 
-
-Sample Questions
-
-Q: How do you troubleshoot VLAN connectivity issues?
-A: Verify show vlan brief, check trunking (show interfaces trunk), test connectivity with ping.
-Why: Isolates misconfigurations in VLAN setup.
-
-
-Q: Why use BGP over OSPF?
-A: BGP for inter-domain routing (e.g., internet); OSPF for intra-domain, faster convergence.
-Why: Matches protocol to network scale and requirements.
 
 ---
 
 
-✅ Chapter 16: Closed-Circuit Television (CCTV) Cameras & Video Management Systems (VMS)
-Goal: Manage surveillance systems for security monitoring and data retention.
-Overview: CCTV systems use IP cameras and VMS (e.g., Milestone, Genetec) to capture and manage video feeds. Proper networking and security configurations ensure reliable operation and data protection.
-What to Know
+# ✅ Chapter 16: Closed-Circuit Television (CCTV) Cameras & Video Management Systems (VMS)
 
-IP Cameras: Configuration, Real-Time Streaming Protocol (RTSP) for video streaming.
-Task: Set up and manage camera feeds.
-Importance: Provides real-time surveillance for security.
+**Goal:** Manage surveillance systems for security monitoring and data retention.  
+**Overview:** CCTV systems use IP cameras and VMS (e.g., Milestone, Genetec) to capture and manage video feeds. Proper networking and security configurations ensure reliable operation and data protection.
 
+## What to Know
 
-VMS: Milestone, Genetec for video storage, playback, and retention policies.
-Task: Manage video data and access.
-Importance: Ensures video availability and compliance with retention policies.
+- **IP Cameras:** Configuration, Real-Time Streaming Protocol (RTSP) for video streaming.  
+  **Task:** Set up and manage camera feeds.  
+  **Importance:** Provides real-time surveillance for security.
 
+- **VMS:** Milestone, Genetec for video storage, playback, and retention policies.  
+  **Task:** Manage video data and access.  
+  **Importance:** Ensures video availability and compliance with retention policies.
 
-Networking: Bandwidth management, Quality of Service (QoS) for prioritizing video traffic.
-Task: Optimize network for video streaming.
-Importance: Prevents congestion and ensures smooth video delivery.
+- **Networking:** Bandwidth management, Quality of Service (QoS) for prioritizing video traffic.  
+  **Task:** Optimize network for video streaming.  
+  **Importance:** Prevents congestion and ensures smooth video delivery.
 
+- **Security:** Access control (user roles), encryption (HTTPS for VMS).  
+  **Task:** Secure video feeds and systems.  
+  **Importance:** Protects sensitive surveillance data.
 
-Security: Access control (user roles), encryption (HTTPS for VMS).
-Task: Secure video feeds and systems.
-Importance: Protects sensitive surveillance data.
+## Comparison Table
 
+| Tool      | Purpose                | Pros                      | Cons                  |
+|-----------|------------------------|---------------------------|-----------------------|
+| Milestone | VMS                    | User-friendly, scalable   | Licensed, costly      |
+| Genetec   | VMS                    | Enterprise-grade, flexible| Complex setup         |
+| RTSP      | Video streaming        | Standard protocol         | Limited security features |
+| QoS       | Bandwidth prioritization| Ensures video quality    | Requires network expertise |
 
+## Practice
 
-Comparison Table
+### Configure IP Camera:
+- **Why:** Enables reliable video feed access.  
+- **How:** Set static IP (e.g., 192.168.1.100) via camera’s web interface.  
+- **Explanation:** Ensures stable network access for continuous streaming.
 
+### Set Up VMS Retention Policy:
+- **Why:** Manages storage while meeting compliance requirements.  
+- **How:** Configure 30-day retention in Milestone VMS.  
+- **Explanation:** Balances storage usage with legal or organizational retention needs.
 
+### Monitor Bandwidth with QoS:
+- **Why:** Prevents network congestion for video streams.  
+- **How:**  
+  ```
+  class-map match-all VIDEO
+   match protocol rtsp
+  policy-map VIDEO_QOS
+   class VIDEO
+    bandwidth percent
+  ```
 
-Tool
-Purpose
-Pros
-Cons
+## Sample Questions
 
+**Q: How do you secure IP camera streams?**  
+**A:** Use HTTPS, change default credentials, isolate camera network with VLANs.  
+**Why:** Prevents unauthorized access to surveillance feeds.
 
-
-Milestone
-VMS
-User-friendly, scalable
-Licensed, costly
-
-
-Genetec
-VMS
-Enterprise-grade, flexible
-Complex setup
-
-
-RTSP
-Video streaming
-Standard protocol
-Limited security features
-
-
-QoS
-Bandwidth prioritization
-Ensures video quality
-Requires network expertise
-
-
-Practice
-
-Configure IP Camera:
-Why: Enables reliable video feed access.
-How: Set static IP (e.g., 192.168.1.100) via camera’s web interface.
-Explanation: Ensures stable network access for continuous streaming.
-
-
-Set Up VMS Retention Policy:
-Why: Manages storage while meeting compliance requirements.
-How: Configure 30-day retention in Milestone VMS.
-Explanation: Balances storage usage with legal or organizational retention needs.
-
-
-Monitor Bandwidth with QoS:
-Why: Prevents network congestion for video streams.
-How:
-
-class-map match-all VIDEO
- match protocol rtsp
-policy-map VIDEO_QOS
- class VIDEO
-  bandwidth percent
+**Q: Why use VMS instead of local camera storage?**  
+**A:** VMS provides centralized management, scalability, retention policies, and remote access.  
+**Why:** Improves monitoring, compliance, and control.
 
 
