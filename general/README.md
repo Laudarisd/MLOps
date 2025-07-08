@@ -1746,7 +1746,7 @@ Why: Identifies and resolves log ingestion issues.
 - **Importance:** Identifies bottlenecks and security threats.
 
 ### Cisco IOS
-- **Description:** Internetwork Operating System, CLI for configuring Cisco devices.
+- **Description:** Internetwork Operating System, CLI(Command Line Interface) for configuring Cisco devices.
 - **Task:** Manage switches, routers, and firewalls.
 - **Importance:** Provides granular control over network infrastructure.
 
