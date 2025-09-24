@@ -26,9 +26,26 @@ Orchestration coordinates multiple tasks, jobs, or services, ensuring they run i
   python scheduler.py
   ```
 
+
 ---
 
-## 4. References
+## 4. Security & TLS
+
+### Redis Security & TLS
+- Use Redis with TLS enabled for encrypted communication ([Redis TLS Guide](https://redis.io/docs/management/security/encryption/)).
+- Set a strong password for Redis and use `requirepass` in config.
+- Bind Redis to localhost or use a firewall to restrict access.
+- For production, avoid running Redis in "protected mode" off.
+
+### Celery Security
+- Use secure broker URLs (e.g., `rediss://` for Redis with TLS).
+- Avoid exposing Celery Flower or management UIs without authentication.
+- Use environment variables for sensitive configs.
+
+---
+
+## 5. References
 - [Celery Documentation](https://docs.celeryq.dev/en/stable/)
 - [Redis Docs](https://redis.io/documentation)
+- [Redis Security](https://redis.io/docs/management/security/)
 - [APScheduler Docs](https://apscheduler.readthedocs.io/en/latest/)
