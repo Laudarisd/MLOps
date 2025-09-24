@@ -1,0 +1,11 @@
+# elk_config.yaml
+# Sample configuration for ELK (Elasticsearch, Logstash, Kibana) stack
+elasticsearch:
+  host: localhost
+  port: 9200
+logstash:
+  host: localhost
+  port: 5044
+kibana:
+  host: localhost
+  port: 5601

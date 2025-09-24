@@ -1,0 +1,6 @@
+# prometheus_config.yaml
+# Sample configuration for Prometheus monitoring
+scrape_configs:
+  - job_name: 'mlops_app'
+    static_configs:
+      - targets: ['localhost:8000']

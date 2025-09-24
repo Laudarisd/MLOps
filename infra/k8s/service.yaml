@@ -1,0 +1,14 @@
+# service.yaml
+# Sample Kubernetes Service manifest
+apiVersion: v1
+kind: Service
+metadata:
+  name: mlops-app-service
+spec:
+  selector:
+    app: mlops-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: ClusterIP

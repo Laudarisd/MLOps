@@ -1,0 +1,3 @@
+# Sample MLflow configuration
+default-artifact-root: ./mlruns
+backend-store-uri: sqlite:///mlflow.db

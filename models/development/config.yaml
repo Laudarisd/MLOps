@@ -1,0 +1,6 @@
+# config.yaml
+# Sample configuration for model training
+data_path: "../../data/processed/processed_data.csv"
+model_params:
+  max_iter: 100
+  solver: "lbfgs"

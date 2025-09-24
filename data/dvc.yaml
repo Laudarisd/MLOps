@@ -1,0 +1,19 @@
+stages:
+  - stage: preprocess
+    steps:
+      - script: |
+          python data_management/ingestion.py
+          python data_management/preprocessing.py
+        name: Preprocess Data
+
+  - stage: train
+    steps:
+      - script: |
+          python model/development/train.py
+        name: Train Model
+
+  - stage: deploy
+    steps:
+      - script: |
+          python model/deployment/api/app.py
+        name: Deploy Model API

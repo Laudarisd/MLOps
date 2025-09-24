@@ -1,0 +1,9 @@
+# template.yaml
+# Sample AWS CloudFormation template
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Sample CloudFormation template for S3 bucket
+Resources:
+  MLOpsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: mlops-sample-bucket

@@ -1,4 +1,5 @@
 # MLops
+
 MLOps, short for Machine Learning Operations, is a key aspect of Machine Learning engineering that focuses on efficiently deploying machine learning models into production and ensuring their ongoing maintenance and monitoring. It is a collaborative effort that typically involves data scientists, DevOps engineers, and IT professionals working together.
 
 <div align="center">
@@ -8,21 +9,95 @@ MLOps, short for Machine Learning Operations, is a key aspect of Machine Learnin
 
 [reference](https://proceedings.neurips.cc/paper_files/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
 
-
-According to SIG MLOps(Special Interest Group for Machine Learning Operations), the best MLOps setup is one where machine learning models are handled just like any other software in a CI/CD(continous Integration/Continous Development) system. These models are deployed alongside the services that use them, as part of a smooth release process. By following these practices, we aim to speed up the use of AI in software and deliver smarter software faster. Below, we explain key ideas in MLOps, such as step-by-step development, automation, continous development, version control, testing, reproducibility, and monitoring. 
-
+According to SIG MLOps(Special Interest Group for Machine Learning Operations), the best MLOps setup is one where machine learning models are handled just like any other software in a CI/CD(continous Integration/Continous Development) system. These models are deployed alongside the services that use them, as part of a smooth release process. By following these practices, we aim to speed up the use of AI in software and deliver smarter software faster. Below, we explain key ideas in MLOps, such as step-by-step development, automation, continous development, version control, testing, reproducibility, and monitoring.
 
 In this repository, we will cover various aspects of MLOps, including best practices, tools, and techniques for deploying, monitoring, and managing machine learning models in production. We will explore topics from backeend development to front-end development, and from data management to model training and validation. Moreover, we will also explore continuous integration and continuous deployment (CI/CD), model versioning, containerization, orchestration, and monitoring.
 
-
 ---
 
-
 ## Contents
+
 1. [Introduction](#introduction)
 2. [Process and TOOLs for MLOps](#Process-and-TOOLs-for-MLOps)
 3. [MLOps Architecture](#MLOps-Architecture)
 4. [Cloud Based MLOps](#Cloud-Based-MLOps)
+
+## Repository Structure
+
+```plaintext
+MLOps/
+│── data/                          # Data & versioning
+│   ├── raw/                       # Raw data (unprocessed)
+│   ├── processed/                 # Processed / cleaned datasets
+│   ├── dvc.yaml                   # DVC pipeline config (if using DVC)
+│   └── README.md
+│
+│── data_management/                # ETL & feature engineering
+│   ├── ingestion.py
+│   ├── preprocessing.py
+│   ├── feature_store/             # (e.g., Feast, custom feature engineering)
+│   └── README.md
+│
+│── experiments/                    # MLflow or experiment tracking
+│   ├── mlflow_server/             # MLflow configs, Dockerfile
+│   ├── notebooks/                 # Jupyter/Colab experiments
+│   └── README.md
+│
+│── model/                          # Model development & training
+│   ├── development/               # Prototypes, training scripts
+│   │   ├── train.py
+│   │   ├── dataset.py
+│   │   ├── model.py
+│   │   └── config.yaml
+│   ├── deployment/                # Ready-to-serve models
+│   │   ├── api/                   # FastAPI / Flask serving
+│   │   ├── batch/                 # Batch inference jobs
+│   │   └── streaming/             # Kafka/real-time inference
+│   └── governance/                # Model governance & compliance
+│       ├── bias_fairness_check.py
+│       ├── explainability.py
+│       └── README.md
+│
+│── monitoring/                     # Monitoring & retraining
+│   ├── logging/                   # Logging configs (ELK, Prometheus)
+│   ├── drift_detection.py
+│   ├── retraining.py
+│   └── README.md
+│
+│── infra/                          # Infrastructure & automation
+│   ├── ci_cd/                     # GitHub Actions / GitLab CI configs
+│   │   └── ci.yml
+│   ├── orchestration/             # Celery, Redis, Kafka workers
+│   │   ├── celery_worker.py
+│   │   ├── redis_config.py
+│   │   └── scheduler.py
+│   ├── gpu_management/            # GPU-aware job scheduling
+│   ├── docker/                    # Dockerfiles
+│   ├── k8s/                       # Kubernetes manifests (deployment, service, HPA)
+│   └── README.md
+│
+│── dashboards/                     # Visualization & BI
+│   ├── powerbi/                   # PowerBI reports
+│   ├── tableau/                   # Tableau workbooks
+│   └── grafana/                   # Grafana dashboards configs
+│
+│── tests/                          # Unit & integration tests
+│   ├── test_data_pipeline.py
+│   ├── test_model_training.py
+│   ├── test_api.py
+│   └── README.md
+│
+│── scripts/                        # Utility scripts
+│   ├── run_pipeline.sh
+│   ├── start_server.sh
+│   └── deploy_model.sh
+│
+│── README.md                       # High-level project overview
+│── LICENSE
+│── requirements.txt                # Python dependencies
+│── docker-compose.yml              # Local orchestration (MLflow + API + DB + Redis)
+│── Makefile                        # Automation (train, deploy, test, clean)
+
 
 
 ---
@@ -94,49 +169,57 @@ The components of MLOps can be visualize and described as follows:
 ```
 
 *Programming Languagse*:
+
 - **Python**
 
 *ML Libraries*:
+
 - **Scikit-learn**
 - **TensorFlow or PyTorch**
 
 *ML Model Deployment*
-- **REST API Frameworks**: 
+
+- **REST API Frameworks**:
   - **FastAPI**, **Flask**, **Django**
-- **Advanced Platforms**: 
+- **Advanced Platforms**:
   - **Seldon Core**: Kubernetes-native platform for deploying, scaling, and managing thousands of models.
   - **Kubeflow**: End-to-end orchestration for machine learning workflows on Kubernetes.
   - **TensorFlow Serving**: A flexible, high-performance serving system for machine learning models in production.
   - **TorchServe**: PyTorch-native model serving platform for large-scale deployment.
 
 *Cloud Platforms & Deployment*
+
 - **AWS**
 - **Azure**
 - **Google Cloud Platform**
 
 *Deployment(CI/CD)*:
+
 - **Jenkins**
 
 *Container & Orchestration*:
+
 - **Docker**
 - **Kubernetes**
 
 *Monitoring & Logging*:
+
 - **Prometheus**
 - **Grafana**
 
 *Version Control*:
+
 - **Git**
 
 *Scaling & Management*:
+
 - **Kubeflow**
 - **Seldon**
 
 *Data Management*:
+
 - **Databricks**
 - **Snowflake**
-
-
 
 <div align="center">
   <img src="./img/1.webp" alt="Sample Image" width="500">
@@ -145,10 +228,10 @@ The components of MLOps can be visualize and described as follows:
 
 [Reference](https://superwise.ai/blog/kserve-vs-seldon-core/)
 
-
 ---
 
 ## MLOps Architecture
+
 In the following section we will focus on main components of MLOps architecture. The main components of MLOps architecture are as follows:
 
 1. **Data Management**: This component is responsible for managing the data used in the machine learning pipeline. It includes data collection, storage, and preprocessing.[click here](./data_management/README.md)
@@ -173,8 +256,9 @@ Cloud-based MLOps platforms provide comprehensive solutions for deploying, manag
 ### Popular Cloud-Based MLOps Platforms
 
 1. **Amazon SageMaker (AWS)**:
+
    - **Overview**: A fully managed service that enables data scientists and developers to build, train, and deploy machine learning models quickly.
-   - **Features**: 
+   - **Features**:
      - Model building and training with built-in algorithms.
      - Support for training on GPUs and deploying models in production.
      - Integration with AWS services like S3 for data storage, Lambda for serverless computing, and CloudWatch for monitoring.
@@ -183,16 +267,16 @@ Cloud-based MLOps platforms provide comprehensive solutions for deploying, manag
      ```bash
      from sagemaker import Session
      from sagemaker.tensorflow import TensorFlowModel
-     
+
      model = TensorFlowModel(model_data='s3://your-model-path/model.tar.gz',
                              role='your-sagemaker-role',
                              framework_version='2.4.1')
-     
+
      predictor = model.deploy(initial_instance_count=1, instance_type='ml.m5.large')
      ```
    - **Use Case**: Large-scale machine learning applications where integration with other AWS services is essential.
-
 2. **Google AI Platform (Google Cloud)**:
+
    - **Overview**: A unified platform that lets you build, deploy, and manage machine learning models with scalable infrastructure.
    - **Features**:
      - Managed Jupyter Notebooks for model development.
@@ -209,8 +293,8 @@ Cloud-based MLOps platforms provide comprehensive solutions for deploying, manag
      --runtime-version 2.3
      ```
    - **Use Case**: Organizations looking to integrate machine learning models with GCP’s powerful data analytics tools like BigQuery.
-
 3. **Azure Machine Learning (Microsoft Azure)**:
+
    - **Overview**: A cloud-based platform to accelerate the machine learning lifecycle with automated machine learning (AutoML), deployment, and monitoring.
    - **Features**:
      - Drag-and-drop interface for creating machine learning workflows.
@@ -220,16 +304,16 @@ Cloud-based MLOps platforms provide comprehensive solutions for deploying, manag
    - **Example**: Training and deploying a model on Azure ML.
      ```python
      from azureml.core import Workspace, Experiment
-     
+
      ws = Workspace.from_config()
      experiment = Experiment(workspace=ws, name='my_experiment')
-     
+
      run = experiment.submit(config=your_config)
      run.wait_for_completion(show_output=True)
      ```
    - **Use Case**: Businesses that rely on Microsoft Azure for their cloud infrastructure and need seamless integration with their Azure environment.
-
 4. **Databricks (on AWS/Azure)**:
+
    - **Overview**: A unified data analytics platform that allows teams to collaborate on machine learning models, integrating with major cloud providers.
    - **Features**:
      - Managed Apache Spark for scalable data processing.
@@ -240,7 +324,7 @@ Cloud-based MLOps platforms provide comprehensive solutions for deploying, manag
      ```python
      import mlflow
      mlflow.set_experiment('my_experiment')
-     
+
      with mlflow.start_run():
          mlflow.log_param('param1', value)
          mlflow.log_metric('accuracy', accuracy_score)
@@ -252,18 +336,19 @@ Cloud-based MLOps platforms provide comprehensive solutions for deploying, manag
 
 In a typical **cloud-based MLOps** workflow, the process involves:
 
-1. **Data Preparation**: 
+1. **Data Preparation**:
+
    - Using services like AWS S3, GCP Cloud Storage, or Azure Blob Storage to store and retrieve datasets.
    - Preprocessing data using managed Jupyter Notebooks or Apache Spark (via Databricks).
-   
-2. **Model Training and Tuning**: 
+2. **Model Training and Tuning**:
+
    - Using Amazon SageMaker, Google AI Platform, or Azure ML for training models on cloud infrastructure (GPUs/TPUs).
    - Automatic hyperparameter tuning using tools like SageMaker Automatic Model Tuning or Google AI HyperTune.
+3. **Model Deployment**:
 
-3. **Model Deployment**: 
    - Deploying the trained model as a REST API using cloud platforms’ serving capabilities (e.g., SageMaker Endpoint, GCP AI Platform, or Azure Kubernetes Service for serving models at scale).
-
 4. **Model Monitoring**:
+
    - Setting up monitoring for model performance using Prometheus/Grafana on Kubernetes or using cloud-native monitoring tools like AWS CloudWatch, Azure Monitor, or Google Stackdriver.
 
 ### Benefits of Cloud-Based MLOps
@@ -274,7 +359,6 @@ In a typical **cloud-based MLOps** workflow, the process involves:
 - **Seamless Integration**: Integrate with other cloud-native services like storage, databases, and CI/CD pipelines.
 
 ---
-
 
 # MLOps Maturity Levels
 
@@ -287,12 +371,14 @@ MLOps consists of three maturity levels, each representing a step towards more a
 At this stage, ML workflows are mostly manual, with minimal integration or automation. This is often the starting point for organizations beginning their ML journey.
 
 ### **Characteristics:**
+
 - Data collection, preprocessing, model training, and deployment are manual.
 - No version control for datasets, models, or code.
 - Model deployment is a one-time activity without a feedback loop.
 - Collaboration is limited, often siloed between data scientists and operations teams.
 
 ### **Challenges:**
+
 - Lack of reproducibility: Results are difficult to replicate.
 - Time-consuming and error-prone processes.
 - Scalability issues due to manual effort.
@@ -304,6 +390,7 @@ At this stage, ML workflows are mostly manual, with minimal integration or autom
 This level introduces automation into key stages of the ML lifecycle, improving reproducibility and collaboration.
 
 ### **Characteristics:**
+
 - Automated data preprocessing, model training, and evaluation pipelines.
 - Experiment tracking for hyperparameters, metrics, and artifacts (e.g., using MLflow or Weights & Biases).
 - Version control for code and models using Git or DVC.
@@ -311,11 +398,13 @@ This level introduces automation into key stages of the ML lifecycle, improving 
 - Basic monitoring of model performance in production.
 
 ### **Advantages:**
+
 - Faster iteration cycles and deployment times.
 - Reproducibility of experiments and results.
 - Collaboration between data scientists and operations teams is improved.
 
 ### **Tools:**
+
 - **Experiment Tracking:** MLflow, Neptune, Weights & Biases.
 - **Workflow Orchestration:** Kubeflow, Apache Airflow.
 - **CI/CD:** Jenkins, GitHub Actions, GitLab CI/CD.
@@ -327,6 +416,7 @@ This level introduces automation into key stages of the ML lifecycle, improving 
 The highest level of MLOps maturity features full end-to-end automation, including continuous training (CT). Systems are designed for scalability, governance, and minimal manual intervention.
 
 ### **Characteristics:**
+
 - Fully automated workflows for data ingestion, model training, testing, and deployment.
 - Continuous integration (CI), continuous deployment (CD), and continuous training (CT).
 - Advanced monitoring for data drift, model drift, and system anomalies.
@@ -335,12 +425,14 @@ The highest level of MLOps maturity features full end-to-end automation, includi
 - Governance mechanisms for compliance and auditability.
 
 ### **Advantages:**
+
 - Highly scalable and reliable ML systems.
 - Minimal manual intervention, reducing human error.
 - Proactive detection and mitigation of performance issues.
 - Seamless collaboration across teams with well-defined processes.
 
 ### **Tools:**
+
 - **Orchestration:** Kubeflow, Argo Workflows.
 - **Model Monitoring:** Evidently AI, Prometheus, Grafana.
 - **Model Registry:** MLflow Model Registry, Seldon Core.
@@ -350,18 +442,16 @@ The highest level of MLOps maturity features full end-to-end automation, includi
 
 ## **Comparison of MLOps Levels**
 
-| Feature                       | Level 0: Manual Process         | Level 1: Automated Pipelines     | Level 2: Full Automation         |
-|-------------------------------|----------------------------------|----------------------------------|----------------------------------|
-| **Data Preprocessing**        | Manual                          | Automated                        | Fully Automated                  |
-| **Experiment Tracking**       | None                            | Basic Tracking                   | Advanced Tracking                |
-| **Deployment**                | Manual                          | Automated Deployment             | Continuous Deployment            |
-| **Monitoring**                | None                            | Basic Monitoring                 | Advanced Monitoring              |
-| **Scalability**               | Low                             | Moderate                         | High                             |
-| **Collaboration**             | Limited                         | Improved                         | Seamless                         |
+| Feature                       | Level 0: Manual Process | Level 1: Automated Pipelines | Level 2: Full Automation |
+| ----------------------------- | ----------------------- | ---------------------------- | ------------------------ |
+| **Data Preprocessing**  | Manual                  | Automated                    | Fully Automated          |
+| **Experiment Tracking** | None                    | Basic Tracking               | Advanced Tracking        |
+| **Deployment**          | Manual                  | Automated Deployment         | Continuous Deployment    |
+| **Monitoring**          | None                    | Basic Monitoring             | Advanced Monitoring      |
+| **Scalability**         | Low                     | Moderate                     | High                     |
+| **Collaboration**       | Limited                 | Improved                     | Seamless                 |
 
 ---
-
-
 
 References:
 
