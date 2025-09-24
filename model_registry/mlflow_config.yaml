@@ -1,0 +1,4 @@
+# mlflow_config.yaml
+# Sample MLflow tracking server configuration
+backend_store_uri: sqlite:///mlflow.db
+default_artifact_root: ./mlruns

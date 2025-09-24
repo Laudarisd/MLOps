@@ -1,0 +1,5 @@
+# cost_alert_config.yaml
+# Sample config for cost alert thresholds
+thresholds:
+  monthly_budget_usd: 100.0
+  alert_email: "mlops-team@example.com"

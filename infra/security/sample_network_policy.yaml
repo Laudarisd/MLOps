@@ -1,0 +1,13 @@
+# sample_network_policy.yaml
+# Kubernetes NetworkPolicy example to restrict traffic
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-only-namespace
+spec:
+  podSelector: {}
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              name: my-namespace

@@ -1,0 +1,10 @@
+# sample_prometheus_alert.yml
+# Sample Prometheus alert rule
+alert: HighJobFailureRate
+expr: sum(rate(job_failures_total[5m])) > 5
+for: 10m
+labels:
+  severity: critical
+annotations:
+  summary: "High job failure rate detected"
+  description: "More than 5 job failures per minute for 10 minutes."

@@ -1,0 +1,6 @@
+project: mlops-feature-store
+registry: data/feature_store/registry.db
+provider: local
+online_store:
+  path: data/feature_store/online_store.db
+entity_key_serialization_version: 2

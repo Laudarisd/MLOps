@@ -1,0 +1,10 @@
+# sample_dockerfile
+# Hardened Dockerfile example
+FROM python:3.10-slim
+RUN useradd -m appuser
+WORKDIR /app
+COPY . /app
+RUN pip install --no-cache-dir -r requirements.txt \
+    && chown -R appuser /app
+USER appuser
+CMD ["python", "main.py"]
