@@ -2,6 +2,91 @@
 
 ## 1. Cloud-based MLOps (End-to-End)
 
+
+```mermaid
+graph TB
+    %% Styling with larger text
+    classDef client fill:#e1f5fe,stroke:#01579b,stroke-width:3px,color:#000,font-size:16px,font-weight:bold
+    classDef data fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+    classDef ml fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+    classDef deploy fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+    classDef ops fill:#fce4ec,stroke:#880e4f,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+
+    %% Client Layer
+    USERS["👤 END USERS<br/>Web/Mobile/API Clients"]
+  
+    %% Data Layer
+    INGEST["📥 DATA INGESTION<br/>Kinesis, EventBridge<br/>Event Hubs, Logic Apps"]
+  
+    STORE["📦 DATA STORAGE<br/>S3, Data Lake<br/>Blob Storage, ADLS"]
+  
+    PROCESS["🔧 DATA PROCESSING<br/>Glue, EMR, Lambda<br/>Data Factory, Functions"]
+  
+    FEATURES["🏪 FEATURE STORE<br/>SageMaker Features<br/>Feast + Cosmos DB"]
+
+    %% ML Development
+    EXPERIMENT["📊 EXPERIMENT TRACKING<br/>SageMaker Experiments<br/>Azure ML Workspace"]
+  
+    TRAINING["🎯 MODEL TRAINING<br/>SageMaker Training<br/>Azure ML Compute"]
+  
+    REGISTRY["📚 MODEL REGISTRY<br/>SageMaker Registry<br/>Azure ML Registry"]
+
+    %% Deployment & Serving
+    PIPELINE["⚙️ CI/CD PIPELINE<br/>CodePipeline, CodeBuild<br/>Azure DevOps Pipelines"]
+  
+    SERVING["🌐 MODEL SERVING<br/>SageMaker Endpoints<br/>Azure ML Endpoints"]
+  
+    GATEWAY["🔀 API MANAGEMENT<br/>API Gateway, ALB<br/>API Management, LB"]
+  
+    SCALING["📈 AUTO SCALING<br/>Auto Scaling Groups<br/>VM Scale Sets"]
+
+    %% Operations & Monitoring
+    MONITOR["📊 MODEL MONITORING<br/>SageMaker Monitor<br/>ML Data Drift Detection"]
+  
+    LOGS["📝 LOGGING<br/>CloudWatch Logs<br/>Log Analytics"]
+  
+    ALERTS["🚨 ALERTING<br/>SNS, EventBridge<br/>Action Groups"]
+  
+    SECURITY["🔐 SECURITY<br/>IAM, Secrets Manager<br/>AAD, Key Vault"]
+  
+    GOVERNANCE["⚖️ GOVERNANCE<br/>Lake Formation<br/>Purview, Data Catalog"]
+  
+    COSTS["💰 COST MANAGEMENT<br/>Cost Explorer<br/>Cost Management"]
+
+    %% Flow Connections
+    USERS --> INGEST
+    INGEST --> STORE
+    STORE --> PROCESS
+    PROCESS --> FEATURES
+    FEATURES --> EXPERIMENT
+    EXPERIMENT --> TRAINING
+    TRAINING --> REGISTRY
+    REGISTRY --> PIPELINE
+    PIPELINE --> SERVING
+    SERVING --> GATEWAY
+    GATEWAY --> SCALING
+    SCALING --> USERS
+  
+    %% Monitoring & Feedback
+    SERVING --> MONITOR
+    MONITOR --> LOGS
+    LOGS --> ALERTS
+    ALERTS --> EXPERIMENT
+  
+    %% Cross-cutting Concerns
+    SERVING --> SECURITY
+    STORE --> SECURITY
+    FEATURES --> GOVERNANCE
+    SCALING --> COSTS
+  
+    %% Apply Styles
+    class USERS client
+    class INGEST,STORE,PROCESS,FEATURES data
+    class EXPERIMENT,TRAINING,REGISTRY ml
+    class PIPELINE,SERVING,GATEWAY,SCALING deploy
+    class MONITOR,LOGS,ALERTS,SECURITY,GOVERNANCE,COSTS ops
+```
+
 ```mermaid
 graph TB
     %% Styling
@@ -139,6 +224,95 @@ graph TB
 ---
 
 ## 2. Linux Server-based MLOps (End-to-End)
+
+
+```mermaid
+graph TB
+    %% Styling with larger text
+    classDef client fill:#e1f5fe,stroke:#01579b,stroke-width:3px,color:#000,font-size:16px,font-weight:bold
+    classDef data fill:#f3e5f5,stroke:#4a148c,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+    classDef ml fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+    classDef deploy fill:#fff3e0,stroke:#e65100,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+    classDef ops fill:#fce4ec,stroke:#880e4f,stroke-width:2px,color:#000,font-size:16px,font-weight:bold
+
+    %% Client Layer
+    USERS["👤 END USERS<br/>Linux Web Applications"]
+  
+    %% Data Layer
+    INGEST["📥 DATA INGESTION<br/>Kafka, Zookeeper<br/>Airflow, Python Scripts"]
+  
+    STORE["📦 DATA STORAGE<br/>PostgreSQL, MySQL<br/>MinIO, Local Storage"]
+  
+    PROCESS["🔧 DATA PROCESSING<br/>Spark, Yarn<br/>Pandas, Dask"]
+  
+    FEATURES["🏪 FEATURE STORE<br/>Feast + PostgreSQL<br/>Redis Cache"]
+
+    %% ML Development
+    EXPERIMENT["📊 EXPERIMENT TRACKING<br/>MLflow + PostgreSQL<br/>TensorBoard, Jupyter"]
+  
+    TRAINING["🎯 MODEL TRAINING<br/>GPU Clusters, CUDA<br/>Slurm, Docker"]
+  
+    REGISTRY["📚 MODEL REGISTRY<br/>MLflow Registry<br/>Git LFS"]
+
+    %% Deployment & Serving
+    PIPELINE["⚙️ CI/CD PIPELINE<br/>Jenkins, GitLab CI<br/>GitHub Actions"]
+  
+    SERVING["🌐 MODEL SERVING<br/>FastAPI, Uvicorn<br/>Flask, Gunicorn"]
+  
+    GATEWAY["🔀 LOAD BALANCING<br/>NGINX, HAProxy<br/>Traefik"]
+  
+    SCALING["📈 ORCHESTRATION<br/>Kubernetes HPA<br/>Docker Swarm"]
+
+    %% Operations & Monitoring  
+    MONITOR["📊 SYSTEM MONITORING<br/>Prometheus, Node Exporter<br/>Grafana, Netdata"]
+  
+    LOGS["📝 LOG MANAGEMENT<br/>ELK Stack<br/>Fluentd, Rsyslog"]
+  
+    ALERTS["🚨 ALERTING<br/>Alertmanager<br/>Slack, Email"]
+  
+    SECURITY["🔐 SECURITY<br/>UFW, iptables<br/>Vault, SSL/TLS"]
+  
+    GOVERNANCE["⚖️ DATA GOVERNANCE<br/>Apache Atlas<br/>Custom Quality Checks"]
+  
+    COSTS["💰 RESOURCE MONITORING<br/>Custom Scripts<br/>Usage Tracking"]
+
+    %% Flow Connections
+    USERS --> INGEST
+    INGEST --> STORE
+    STORE --> PROCESS
+    PROCESS --> FEATURES
+    FEATURES --> EXPERIMENT
+    EXPERIMENT --> TRAINING
+    TRAINING --> REGISTRY
+    REGISTRY --> PIPELINE
+    PIPELINE --> SERVING
+    SERVING --> GATEWAY
+    GATEWAY --> SCALING
+    SCALING --> USERS
+  
+    %% Monitoring & Feedback
+    SERVING --> MONITOR
+    MONITOR --> LOGS
+    LOGS --> ALERTS
+    ALERTS --> EXPERIMENT
+  
+    %% Cross-cutting Concerns
+    SERVING --> SECURITY
+    STORE --> SECURITY
+    FEATURES --> GOVERNANCE
+    SCALING --> COSTS
+  
+    %% Apply Styles
+    class USERS client
+    class INGEST,STORE,PROCESS,FEATURES data
+    class EXPERIMENT,TRAINING,REGISTRY ml
+    class PIPELINE,SERVING,GATEWAY,SCALING deploy
+    class MONITOR,LOGS,ALERTS,SECURITY,GOVERNANCE,COSTS ops
+```
+
+
+
+
 
 ```mermaid
 graph TB
