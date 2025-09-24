@@ -1,3 +1,50 @@
+---
+
+## Troubleshooting
+
+- **Cannot connect to MariaDB:**
+   - Check firewall rules on the DB server and Power BI PC.
+   - Ensure MariaDB is listening on the correct IP and port.
+   - Verify credentials and user host/IP restrictions.
+- **Gateway not detected in Power BI Service:**
+   - Ensure the gateway is running and signed in with the correct Power BI account.
+   - Check network connectivity between the gateway and the database.
+- **Scheduled refresh fails:**
+   - Check gateway logs for errors.
+   - Ensure the gateway machine is always on and connected to the network.
+- **Driver errors:**
+   - Confirm MySQL Connector/NET is installed (64-bit version).
+
+---
+
+## Security Tips
+
+- Use strong, unique passwords for all database and Power BI accounts.
+- Restrict MariaDB user privileges to only what is needed (read-only).
+- Limit MariaDB user access to specific IPs.
+- Keep the gateway machine secure and up to date.
+
+---
+
+## Performance Tips
+
+- Use views or optimized queries to limit the amount of data imported.
+- Schedule refreshes during off-peak hours if possible.
+- Monitor refresh duration and adjust frequency as needed.
+
+---
+
+## Backup & Restore
+
+- **Export Power BI reports:** In Power BI Desktop, use File → Export → Power BI template.
+- **Backup gateway settings:** Use the gateway recovery key and document configuration details.
+- **Restore:** Reinstall gateway and use recovery key to restore settings.
+
+---
+
+## More Information
+
+- See the [Main Project README](../../README.md) for a full project overview and context.
 # Connecting Power BI to MariaDB with On-premises Data Gateway
 
 This guide documents the full process of connecting **Microsoft Power BI** to a **MariaDB** database for data analysis, visualization, and scheduled refresh.

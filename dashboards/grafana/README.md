@@ -1,5 +1,4 @@
 ---
-
 ## 8. Troubleshooting
 
 - **Grafana not starting:**
@@ -13,9 +12,7 @@
 - **Permission errors:**
   - Run commands with `sudo` if needed.
   - Ensure correct file permissions for provisioning files.
-
 ---
-
 ## 9. Security Tips
 
 - Change the default Grafana admin password after first login.
@@ -48,7 +45,7 @@
 ## 12. More Information
 
 - See the [Main Project README](../../README.md) for a full project overview and context.
-Got it 👍
+  Got it 👍
 
 I’ll prepare a **professional Grafana setup guide + provisioning files** so you (or your team) can always redeploy the monitoring stack without missing steps.
 
