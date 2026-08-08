@@ -162,3 +162,11 @@ cython_debug/
 #.idea/
 
 .DS_Store
+
+# Local secrets
+.env.*
+!.env.example
+
+# Local-only files
+Thumbs.db
+*.pyc
